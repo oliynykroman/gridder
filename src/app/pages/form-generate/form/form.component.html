@@ -1,0 +1,9 @@
+<section class="form-container" [formGroup]="form">
+
+
+    <mat-form-field class="example-full-width" *ngfor="let alias of aliases.controls; let i = index">
+        <mat-label>{{i}}</mat-label>
+        <input matInput placeholder="Ex. Pizza" value="Sushi" [formControlName]="i">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addAlias()">Primary</button>
+</section>
