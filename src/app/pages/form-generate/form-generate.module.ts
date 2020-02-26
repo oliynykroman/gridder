@@ -5,9 +5,9 @@ import { FormGenerateRoutingModule } from './form-generate-routing.module';
 import { FormGenerateComponent } from './form-generate.component';
 import { FormComponent } from './form/form.component';
 import { ResultComponent } from './result/result.component';
-import { MatLabel, MatFormField } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {MatInputModule} from '@angular/material/input'; 
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import {MatInputModule} from '@angular/material/input';
     FormGenerateRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ]
 })
 export class FormGenerateModule { }

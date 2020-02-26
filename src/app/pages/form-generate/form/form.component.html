@@ -1,9 +1,15 @@
 <section class="form-container" [formGroup]="form">
-
-
-    <mat-form-field class="example-full-width" *ngfor="let alias of aliases.controls; let i = index">
-        <mat-label>{{i}}</mat-label>
-        <input matInput placeholder="Ex. Pizza" value="Sushi" [formControlName]="i">
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="addAlias()">Primary</button>
+    <div *ngIf="true">dscds</div>
+    <div formArrayName="items" *ngFor="let item of form.get('items')['controls']; let i = index">
+        <div [formGroupName]="i">
+            <div>Column {{i}}</div>
+            <mat-form-field>
+                <input matInput placeholder="Enter column size" formControlName="width" type="number">
+                <mat-select>
+                    <mat-option *ngFor="let unit of units" value="unit">{{unit}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="addItem()">Primary</button>
 </section>

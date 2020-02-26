@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -9,6 +9,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class FormComponent implements OnInit {
 
   public form: FormGroup;
+  public items: FormArray;
+  public units = ['px', 'fr', '%'];
 
   constructor(private fb: FormBuilder) { }
 
@@ -17,12 +19,20 @@ export class FormComponent implements OnInit {
   }
   formInit() {
     this.form = this.fb.group({
-      aliases: this.fb.array([
-        this.fb.control('')
-      ])
+      items: this.fb.array([this.createItem()])
     })
   }
-  addAlias() {
-    // this.form..aliases.push(this.fb.control(''));
+
+  createItem(): FormGroup {
+    return this.fb.group({
+      name: '',
+      units: '',
+      width: null
+    });
+  }
+
+  addItem(): void {
+    this.items = this.form.get('items') as FormArray;
+    this.items.push(this.createItem());
   }
 }
