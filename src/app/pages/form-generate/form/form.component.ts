@@ -19,6 +19,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.formInit();
+    this.onChanges();
   }
   formInit() {
     this.form = this.fb.group({
@@ -39,11 +40,19 @@ export class FormComponent implements OnInit {
     this.items = this.form.get(type) as FormArray;
     this.items.push(this.createItem());
   }
+
+  onChanges() {
+    this.form.valueChanges.subscribe(val => {
+      this.columns = 'grid-template-columns: ';
+      for (let i = 0; i < val.columns.length; i++) {
+        this.columns += val.columns[i].width + val.columns[i].units + ' ';
+      }
+      console.log(this.columns);
+    });
+  }
+
   onSubmit() {
     this.result = this.form.value;
-    this.columns = 'grid-template-columns: ';
-    for (let i = 0; i < this.result.columns.length; i++) {
-      this.columns += this.result.columns[i].width + this.result.columns[i].units + ' ';
-    }
+
   }
 }
