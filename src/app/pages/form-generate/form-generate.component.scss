@@ -1,0 +1,8 @@
+.form-generator {
+    display              : grid;
+    grid-template-columns: 400px 1fr;
+    grid-template-rows   : 1fr;
+    grid-gap             : 20px;
+    height               : 100%;
+
+}

@@ -1,0 +1,18 @@
+.form-container {
+    border-right: 1px solid rgba(0, 0, 0, .2);
+    height      : 100%;
+    overflow    : auto;
+}
+
+.input-group--title {
+    font-weight: bold;
+    font-size  : 1.3em;
+}
+
+.mat-form-field-type-mat-input {
+    padding-right: 30px;
+}
+
+.mat-form-field-type-mat-select {
+    width: 80px;
+}
