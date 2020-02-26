@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-form',
@@ -11,6 +12,8 @@ export class FormComponent implements OnInit {
   public form: FormGroup;
   public items: FormArray;
   public units = ['px', 'fr', '%'];
+  public result;
+  public columns = '';
 
   constructor(private fb: FormBuilder) { }
 
@@ -19,20 +22,28 @@ export class FormComponent implements OnInit {
   }
   formInit() {
     this.form = this.fb.group({
-      items: this.fb.array([this.createItem()])
+      columns: this.fb.array([this.createItem()]),
+      rows: this.fb.array([this.createItem()])
     })
   }
 
   createItem(): FormGroup {
     return this.fb.group({
       name: '',
-      units: '',
-      width: null
+      units: 'fr',
+      width: 1
     });
   }
 
-  addItem(): void {
-    this.items = this.form.get('items') as FormArray;
+  addItem(type: string): void {
+    this.items = this.form.get(type) as FormArray;
     this.items.push(this.createItem());
+  }
+  onSubmit() {
+    this.result = this.form.value;
+    this.columns = 'grid-template-columns: ';
+    for (let i = 0; i < this.result.columns.length; i++) {
+      this.columns += this.result.columns[i].width + this.result.columns[i].units + ' ';
+    }
   }
 }

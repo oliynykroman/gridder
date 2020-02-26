@@ -8,7 +8,7 @@ import { ResultComponent } from './result/result.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-
+import {MatButtonModule} from '@angular/material/button'; 
 
 @NgModule({
   declarations: [FormGenerateComponent, FormComponent, ResultComponent],
@@ -18,7 +18,8 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     FormsModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule
   ]
 })
 export class FormGenerateModule { }

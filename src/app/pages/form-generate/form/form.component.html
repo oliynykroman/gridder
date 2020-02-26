@@ -1,15 +1,36 @@
 <section class="form-container" [formGroup]="form">
-    <div *ngIf="true">dscds</div>
-    <div formArrayName="items" *ngFor="let item of form.get('items')['controls']; let i = index">
+    <div formArrayName="columns" *ngFor="let item of form.get('columns')['controls']; let i = index">
+        <div class="input-group--title">Column {{i}}</div>
         <div [formGroupName]="i">
-            <div>Column {{i}}</div>
             <mat-form-field>
                 <input matInput placeholder="Enter column size" formControlName="width" type="number">
-                <mat-select>
-                    <mat-option *ngFor="let unit of units" value="unit">{{unit}}</mat-option>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select formControlName="units">
+                    <mat-option *ngFor="let item of units" [value]="item" placeholder="'select units'">{{item}}
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
+            <button mat-button color="warn">Delete</button>
         </div>
     </div>
-    <button mat-raised-button color="primary" (click)="addItem()">Primary</button>
+    <button mat-raised-button color="primary" (click)="addItem('columns')">Add column</button>
+    <div formArrayName="rows" *ngFor="let item of form.get('rows')['controls']; let i = index">
+        <div class="input-group--title">Row {{i}}</div>
+        <div [formGroupName]="i">
+            <mat-form-field>
+                <input matInput placeholder="Enter row size" formControlName="width" type="number">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select formControlName="units">
+                    <mat-option *ngFor="let item of units" [value]="item" placeholder="'select units'">{{item}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-button color="warn">Delete</button>
+        </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="addItem('rows')">Add row</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()">submit</button>
+    {{form.value | json}}
 </section>
