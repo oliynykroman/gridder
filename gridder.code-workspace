@@ -4,5 +4,12 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"gitflow4code.features": [
+			{
+				"name": "feature/main-component",
+				"base": "develop"
+			}
+		]
+	}
 }
