@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { gridResult } from '../form/form.component';
 
 @Component({
   selector: 'app-result',
@@ -10,6 +11,9 @@ export class ResultComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+  resultGrid(grid: gridResult) {
+    console.log(grid);
   }
 
 }

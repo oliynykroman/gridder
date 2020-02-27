@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
+
+export class gridResult {
+  columns: string;
+  rows: string;
+}
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -9,11 +13,18 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class FormComponent implements OnInit {
 
+  @Output() emitGrid = new EventEmitter <any> ();
   public form: FormGroup;
   public items: FormArray;
   public units = ['px', 'fr', '%'];
   public result;
   public columns = '';
+  public rows = '';
+
+  public gridResult: gridResult = {
+    columns: '',
+    rows: ''
+  }
 
   constructor(private fb: FormBuilder) { }
 
@@ -44,15 +55,23 @@ export class FormComponent implements OnInit {
   onChanges() {
     this.form.valueChanges.subscribe(val => {
       this.columns = 'grid-template-columns: ';
+      this.rows = 'grid-template-rows: ';
+
       for (let i = 0; i < val.columns.length; i++) {
         this.columns += val.columns[i].width + val.columns[i].units + ' ';
       }
+      for (let i = 0; i < val.rows.length; i++) {
+        this.rows += val.rows[i].width + val.rows[i].units + ' ';
+      }
       console.log(this.columns);
+      console.log(this.rows);
+      this.gridResult.columns = this.columns;
+      this.gridResult.rows = this.rows;
+      // this.voted.emit(this.gridResult);
     });
   }
 
   onSubmit() {
     this.result = this.form.value;
-
   }
 }
