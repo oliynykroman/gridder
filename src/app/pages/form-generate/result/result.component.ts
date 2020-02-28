@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GridService } from 'src/app/services/grid.service';
+import { Grid } from 'src/app/models/grid.model';
 
 @Component({
   selector: 'app-result',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultComponent implements OnInit {
 
-  constructor() { }
+  public grid: Grid = new Grid();
+  constructor(private gridService: GridService) { }
 
   ngOnInit(): void {
+    this.gridService.changeGrid$.subscribe(data => {
+      this.grid = data;
+      console.log(data);
+    });
   }
 
 }
