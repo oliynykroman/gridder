@@ -1,1 +1,26 @@
-<p>result works!</p>
+<div class="grid-container">
+    <section class="grid" [ngStyle]="{'grid-template-columns': grid.columns, 'grid-template-rows': grid.rows}">
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+    </section>
+    <section class="grid-css">
+        <p>
+            display:grid;
+            <br />
+            grid-template-columns: {{grid.columns}};
+            <br />
+            grid-template-rows: {{grid.rows}};
+        </p>
+    </section>
+</div>

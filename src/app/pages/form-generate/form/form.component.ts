@@ -1,11 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { Grid } from 'src/app/models/grid.model';
+import { GridService } from 'src/app/services/grid.service';
 
-
-export class gridResult {
-  columns: string;
-  rows: string;
-}
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -13,7 +10,6 @@ export class gridResult {
 })
 export class FormComponent implements OnInit {
 
-  @Output() emitGrid = new EventEmitter <any> ();
   public form: FormGroup;
   public items: FormArray;
   public units = ['px', 'fr', '%'];
@@ -21,12 +17,9 @@ export class FormComponent implements OnInit {
   public columns = '';
   public rows = '';
 
-  public gridResult: gridResult = {
-    columns: '',
-    rows: ''
-  }
+  public gridResult: Grid = new Grid();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private gridService: GridService) { }
 
   ngOnInit(): void {
     this.formInit();
@@ -54,8 +47,8 @@ export class FormComponent implements OnInit {
 
   onChanges() {
     this.form.valueChanges.subscribe(val => {
-      this.columns = 'grid-template-columns: ';
-      this.rows = 'grid-template-rows: ';
+      this.columns = '';
+      this.rows = '';
 
       for (let i = 0; i < val.columns.length; i++) {
         this.columns += val.columns[i].width + val.columns[i].units + ' ';
@@ -63,15 +56,18 @@ export class FormComponent implements OnInit {
       for (let i = 0; i < val.rows.length; i++) {
         this.rows += val.rows[i].width + val.rows[i].units + ' ';
       }
-      console.log(this.columns);
-      console.log(this.rows);
       this.gridResult.columns = this.columns;
       this.gridResult.rows = this.rows;
-      // this.voted.emit(this.gridResult);
+      this.gridService.updateGrid(this.gridResult);
     });
   }
 
   onSubmit() {
     this.result = this.form.value;
+  }
+
+  deleteItem(index: number, type: string) {
+    this.items = this.form.get(type) as FormArray;
+    this.items.removeAt(index);
   }
 }

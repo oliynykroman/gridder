@@ -11,7 +11,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <button mat-button color="warn">Delete</button>
+            <button mat-button color="warn" (click)="deleteItem(i, 'columns')">Delete</button>
         </div>
     </div>
     <button mat-raised-button color="primary" (click)="addItem('columns')">Add column</button>
@@ -27,10 +27,9 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <button mat-button color="warn">Delete</button>
+            <button mat-button color="warn" (click)="deleteItem(i, 'rows')">Delete</button>
         </div>
     </div>
     <button mat-raised-button color="primary" (click)="addItem('rows')">Add row</button>
     <button mat-raised-button color="primary" (click)="onSubmit()">submit</button>
-    {{form.value | json}}
 </section>
