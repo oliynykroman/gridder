@@ -1,39 +1,75 @@
 <section class="form-container" [formGroup]="form">
-    <mat-card class="example-card">
-        <div formArrayName="columns" *ngFor="let item of form.get('columns')['controls']; let i = index">
-            <div class="input-group--title">Column {{i}}</div>
-            <div [formGroupName]="i">
-                <mat-form-field>
-                    <input matInput placeholder="Enter column size" formControlName="width" type="number">
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-select formControlName="units">
-                        <mat-option *ngFor="let item of units" [value]="item" placeholder="'select units'">{{item}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <button mat-button color="warn" (click)="deleteItem(i, 'columns')">Delete</button>
+
+
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Grid container
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div formArrayName="columns" *ngFor="let item of form.get('columns')['controls']; let i = index">
+                <div class="input-group--title">Column {{i}}</div>
+                <div [formGroupName]="i">
+                    <mat-form-field>
+                        <input matInput placeholder="Enter column size" formControlName="width" type="number">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-select formControlName="units">
+                            <mat-option *ngFor="let item of units" [value]="item" placeholder="'select units'">
+                                {{item}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button mat-button color="warn" (click)="deleteItem(i, 'columns')">Delete</button>
+                </div>
             </div>
-        </div>
-        <button mat-raised-button color="primary" (click)="addItem('columns')">Add column</button>
-    </mat-card>
-    <mat-card class="example-card">
-        <div formArrayName="rows" *ngFor="let item of form.get('rows')['controls']; let i = index">
-            <div class="input-group--title">Row {{i}}</div>
-            <div [formGroupName]="i">
-                <mat-form-field>
-                    <input matInput placeholder="Enter row size" formControlName="width" type="number">
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-select formControlName="units">
-                        <mat-option *ngFor="let item of units" [value]="item" placeholder="'select units'">{{item}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <button mat-button color="warn" (click)="deleteItem(i, 'rows')">Delete</button>
+            <button mat-raised-button color="primary" (click)="addItem('columns')">Add column</button>
+            <div formArrayName="rows" *ngFor="let item of form.get('rows')['controls']; let i = index">
+                <div class="input-group--title">Row {{i}}</div>
+                <div [formGroupName]="i">
+                    <mat-form-field>
+                        <input matInput placeholder="Enter row size" formControlName="width" type="number">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-select formControlName="units">
+                            <mat-option *ngFor="let item of units" [value]="item" placeholder="'select units'">
+                                {{item}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button mat-button color="warn" (click)="deleteItem(i, 'rows')">Delete</button>
+                </div>
             </div>
-        </div>
-        <button mat-raised-button color="primary" (click)="addItem('rows')">Add row</button>
-    </mat-card>
-    <button mat-raised-button color="primary" (click)="onSubmit()">submit</button>
+            <button mat-raised-button color="primary" (click)="addItem('rows')">Add row</button>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Grid content
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div formArrayName="content" *ngFor="let item of form.get('content')['controls']; let i = index">
+                <div [formGroupName]="i">
+                    <mat-form-field>
+                        <input matInput placeholder="container name" formControlName="containerName" type="text">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="container column start" formControlName="containerColStart"
+                            type="text">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="container column end" formControlName="containerColEnd"
+                            type="text">
+                    </mat-form-field>
+                </div>
+
+                <button mat-button color="warn" (click)="deleteItem(i, 'content')">Delete</button>
+            </div>
+            <button mat-raised-button color="primary" (click)="addContent('content')">Add content block</button>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+
+    <button mat-raised-button color="primary" (click)="onSubmit()">Save all</button>
 </section>
