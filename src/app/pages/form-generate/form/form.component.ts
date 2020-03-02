@@ -45,11 +45,11 @@ export class FormComponent implements OnInit {
 
   createContent(): FormGroup {
     return this.fb.group({
-      containerName: '',
-      containerColStart: '',
-      containerColEnd: '',
-      containerRowStart: '',
-      containerRowEnd: '',
+      containerName: '1',
+      containerColStart: 1,
+      containerColEnd: 1,
+      containerRowStart: 1,
+      containerRowEnd: 1,
     });
   }
 

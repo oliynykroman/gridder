@@ -1,13 +1,20 @@
 
 export class Grid {
-    columns: string;
-    rows: string;
-    content: GridContent;
+    columns: GridStructure[];
+    rows: GridStructure[];
+    content: GridContent[];
 }
 
 
 export class GridContent {
-    contentClassName: string;
-    contentCol: string;
-    contentRow: string;
+    containerName: string;
+    containerColStart: string;
+    containerColEnd: string;
+    containerRowStart: string;
+    containerRowEnd: string;
+}
+export class GridStructure {
+    name: string;
+    units: string;
+    width: number
 }
