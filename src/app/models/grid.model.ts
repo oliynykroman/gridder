@@ -1,6 +1,13 @@
 
-export class Grid{
+export class Grid {
     columns: string;
     rows: string;
-    content: string;
+    content: GridContent;
+}
+
+
+export class GridContent {
+    contentClassName: string;
+    contentCol: string;
+    contentRow: string;
 }

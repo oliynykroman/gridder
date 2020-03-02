@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { Grid } from 'src/app/models/grid.model';
+import { Grid, GridContent } from 'src/app/models/grid.model';
 import { GridService } from 'src/app/services/grid.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class FormComponent implements OnInit {
   public result;
   public columns = '';
   public rows = '';
-  public content = '';
+  public content: GridContent[] = [];
   public panelOpenState = false;
 
   public gridResult: Grid = new Grid();
@@ -47,8 +47,10 @@ export class FormComponent implements OnInit {
     return this.fb.group({
       containerName: '',
       containerColStart: '',
-      containerColEnd: ''
-    })
+      containerColEnd: '',
+      containerRowStart: '',
+      containerRowEnd: '',
+    });
   }
 
   addItem(type: string): void {
@@ -63,30 +65,12 @@ export class FormComponent implements OnInit {
   }
   onChanges() {
     this.form.valueChanges.subscribe(val => {
-      this.columns = '';
-      this.rows = '';
-      this.content = '';
-
-      for (let i = 0; i < val.columns.length; i++) {
-        this.columns += val.columns[i].width + val.columns[i].units + ' ';
-      }
-      for (let i = 0; i < val.rows.length; i++) {
-        this.rows += val.rows[i].width + val.rows[i].units + ' ';
-      }
-      for (let i = 0; i < val.content.length; i++) {
-        this.content += val.content[i].containerColStart + '/' + val.content[i].containerColEnd;
-      }
-      this.gridResult.columns = this.columns;
-      this.gridResult.rows = this.rows;
-      this.gridResult.content = this.content;
-      this.gridService.updateGrid(this.gridResult);
-      console.log(this.gridResult);
+      this.gridService.updateGrid(this.form.value);
     });
   }
 
   onSubmit() {
     this.result = this.form.value;
-    console.log(this.result);
   }
 
   deleteItem(index: number, type: string) {
