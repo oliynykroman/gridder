@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { Grid } from 'src/app/models/grid.model';
+import { Grid, GridContent } from 'src/app/models/grid.model';
 import { GridService } from 'src/app/services/grid.service';
 
 @Component({
@@ -16,6 +16,8 @@ export class FormComponent implements OnInit {
   public result;
   public columns = '';
   public rows = '';
+  public content: GridContent[] = [];
+  public panelOpenState = false;
 
   public gridResult: Grid = new Grid();
 
@@ -28,7 +30,8 @@ export class FormComponent implements OnInit {
   formInit() {
     this.form = this.fb.group({
       columns: this.fb.array([this.createItem()]),
-      rows: this.fb.array([this.createItem()])
+      rows: this.fb.array([this.createItem()]),
+      content: this.fb.array([this.createContent()])
     })
   }
 
@@ -40,25 +43,29 @@ export class FormComponent implements OnInit {
     });
   }
 
+  createContent(): FormGroup {
+    return this.fb.group({
+      containerName: '1',
+      containerColStart: 1,
+      containerColEnd: 1,
+      containerRowStart: 1,
+      containerRowEnd: 1,
+    });
+  }
+
   addItem(type: string): void {
     this.items = this.form.get(type) as FormArray;
     this.items.push(this.createItem());
   }
 
+  addContent(type: string): void {
+    this.items = this.form.get(type) as FormArray;
+    this.items.push(this.createContent());
+
+  }
   onChanges() {
     this.form.valueChanges.subscribe(val => {
-      this.columns = '';
-      this.rows = '';
-
-      for (let i = 0; i < val.columns.length; i++) {
-        this.columns += val.columns[i].width + val.columns[i].units + ' ';
-      }
-      for (let i = 0; i < val.rows.length; i++) {
-        this.rows += val.rows[i].width + val.rows[i].units + ' ';
-      }
-      this.gridResult.columns = this.columns;
-      this.gridResult.rows = this.rows;
-      this.gridService.updateGrid(this.gridResult);
+      this.gridService.updateGrid(this.form.value);
     });
   }
 
