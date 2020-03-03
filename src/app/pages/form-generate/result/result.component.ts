@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GridService } from 'src/app/services/grid.service';
 import { Grid, GridContent, cellRow } from 'src/app/models/grid.model';
+import { GridHelper } from 'src/app/helpers/grid.helper';
+import { GridProperties } from 'src/app/enums/grid-property.enum';
 
 @Component({
   selector: 'app-result',
@@ -13,7 +15,8 @@ export class ResultComponent implements OnInit {
   public gridColumns: string = '';
   public gridRows: string = '';
   public gridCell = [];
-  constructor(private gridService: GridService) { }
+  constructor(private gridService: GridService,
+    private gridHelper: GridHelper) { }
 
   ngOnInit(): void {
     this.gridService.changeGrid$.subscribe(data => {
@@ -24,14 +27,8 @@ export class ResultComponent implements OnInit {
   }
 
   prepareGrid(data: Grid) {
-    this.gridColumns = '';
-    this.gridRows = '';
-    for (let i = 0; i < data.columns.length; i++) {
-      this.gridColumns += data.columns[i].width + data.columns[i].units + ' ';
-    }
-    for (let i = 0; i < data.rows.length; i++) {
-      this.gridRows += data.rows[i].width + data.rows[i].units + ' ';
-    }
+    this.gridColumns = this.gridHelper.generateGreedProperty(data, GridProperties.columns);
+    this.gridRows = this.gridHelper.generateGreedProperty(data, GridProperties.rows);
   }
 
   prepareCell(data: Grid) {
@@ -45,5 +42,6 @@ export class ResultComponent implements OnInit {
       this.gridCell.push(temp);
     }
   }
+
 
 }
