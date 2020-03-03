@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GridService } from 'src/app/services/grid.service';
-import { Grid, GridContent } from 'src/app/models/grid.model';
+import { Grid, GridContent, cellRow } from 'src/app/models/grid.model';
 
 @Component({
   selector: 'app-result',
@@ -20,7 +20,6 @@ export class ResultComponent implements OnInit {
       this.grid = data;
       this.prepareGrid(data);
       this.prepareCell(data);
-      console.log(data)
     });
   }
 
@@ -37,17 +36,14 @@ export class ResultComponent implements OnInit {
 
   prepareCell(data: Grid) {
     this.gridCell = [];
-    let cellRow = {
-      col: '',
-      row: ''
-    }
-    for (let i = 0; i < data.content.length; i++) {
-      cellRow.col = data.content[i].containerColStart + '/' + data.content[i].containerColEnd;
-      cellRow.row = data.content[i].containerRowStart + '/' + data.content[i].containerRowEnd;
-      this.gridCell.push(cellRow);
-    }
-    console.log(this.gridCell);
-  }
 
+    for (let i = 0; i < data.content.length; i++) {
+      let temp = new cellRow('', '');
+      temp.col = data.content[i].containerColStart + '/' + data.content[i].containerColEnd;
+      temp.row = data.content[i].containerRowStart + '/' + data.content[i].containerRowEnd;
+
+      this.gridCell.push(temp);
+    }
+  }
 
 }

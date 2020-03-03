@@ -18,3 +18,13 @@ export class GridStructure {
     units: string;
     width: number
 }
+
+
+export class cellRow {
+    col: string;
+    row: string;
+    constructor(col: string, row: string) {
+      this.col = col;
+      this.row = row;
+    }
+  }
