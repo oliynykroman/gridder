@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Grid, GridContent } from 'src/app/models/grid.model';
+import { GridService } from 'src/app/services/grid.service';
 
 @Component({
   selector: 'app-form',
@@ -14,8 +15,13 @@ export class FormComponent implements OnInit {
   public units = ['px', 'fr', '%'];
   public result;
   public columns = '';
+  public rows = '';
+  public content: GridContent[] = [];
+  public panelOpenState = false;
 
-  constructor(private fb: FormBuilder) { }
+  public gridResult: Grid = new Grid();
+
+  constructor(private fb: FormBuilder, private gridService: GridService) { }
 
   ngOnInit(): void {
     this.formInit();
@@ -24,7 +30,8 @@ export class FormComponent implements OnInit {
   formInit() {
     this.form = this.fb.group({
       columns: this.fb.array([this.createItem()]),
-      rows: this.fb.array([this.createItem()])
+      rows: this.fb.array([this.createItem()]),
+      content: this.fb.array([this.createContent()])
     })
   }
 
@@ -36,23 +43,38 @@ export class FormComponent implements OnInit {
     });
   }
 
+  createContent(): FormGroup {
+    return this.fb.group({
+      containerName: '1',
+      containerColStart: 1,
+      containerColEnd: 1,
+      containerRowStart: 1,
+      containerRowEnd: 1,
+    });
+  }
+
   addItem(type: string): void {
     this.items = this.form.get(type) as FormArray;
     this.items.push(this.createItem());
   }
 
+  addContent(type: string): void {
+    this.items = this.form.get(type) as FormArray;
+    this.items.push(this.createContent());
+
+  }
   onChanges() {
     this.form.valueChanges.subscribe(val => {
-      this.columns = 'grid-template-columns: ';
-      for (let i = 0; i < val.columns.length; i++) {
-        this.columns += val.columns[i].width + val.columns[i].units + ' ';
-      }
-      console.log(this.columns);
+      this.gridService.updateGrid(this.form.value);
     });
   }
 
   onSubmit() {
     this.result = this.form.value;
+  }
 
+  deleteItem(index: number, type: string) {
+    this.items = this.form.get(type) as FormArray;
+    this.items.removeAt(index);
   }
 }

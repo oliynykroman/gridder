@@ -1,1 +1,15 @@
-<p>result works!</p>
+<div class="grid-container">
+    <section class="grid" [ngStyle]="{'grid-template-columns': gridColumns, 'grid-template-rows': gridRows}">
+        <div class="grid-cell" *ngFor="let item of gridCell"
+            [ngStyle]="{'grid-column': item.col, 'grid-row': item.row}"></div>
+    </section>
+    <section class="grid-css">
+        <p>
+            display:grid;
+            <br />
+            grid-template-columns: {{gridColumns}};
+            <br />
+            grid-template-rows: {{gridColumns}};
+        </p>
+    </section>
+</div>
