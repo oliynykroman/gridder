@@ -1,36 +1,23 @@
 .form-container {
-    height  : 100%;
-    overflow: auto;
-    padding : 20px 0;
+    margin: 20px 0;
+}
+
+.add-button {
+    width     : 100%;
+    margin-top: 10px;
 }
 
 .input-group--title {
-    font-weight: bold;
-    font-size  : 1.3em;
-}
-
-.mat-form-field-type-mat-select {
-    width: 80px;
-}
-
-.input-controlls-group {
-    display        : flex;
-    flex-direction : row;
-    justify-content: space-between;
-
-    &.wrap {
-        flex-wrap: wrap;
-    }
+    font-weight   : bold;
+    text-transform: uppercase;
+    margin-bottom : 3px;
+    font-size     : 1.1em;
 }
 
 .form-array-group {
-    margin-bottom: 60px;
-}
+    margin-bottom: 50px;
 
-.w-100 {
-    width: 100%;
-}
-
-.w-50 {
-    width: calc(50% - 15px);
+    .form-array-group__group {
+        margin-bottom: 10px;
+    }
 }

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import '~bootstrap/dist/css/bootstrap.css';
 
 html,
 body {
@@ -25,4 +26,23 @@ body {
 
 * {
     box-sizing: border-box;
+}
+
+.accordion {
+    .bg-info {
+        background-color: rgba(0, 0, 0, .03) !important;
+        padding         : 0;
+
+        .btn {
+            width          : 100%;
+            text-align     : left;
+            text-decoration: none;
+            color          : var(--black);
+
+            &[aria-expanded="true"],
+            &:hover {
+                background-color: rgba(0, 0, 0, .06) !important;
+            }
+        }
+    }
 }

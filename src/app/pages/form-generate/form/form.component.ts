@@ -2,11 +2,13 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Grid, GridContent } from 'src/app/models/grid.model';
 import { GridService } from 'src/app/services/grid.service';
+import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
+  providers: [NgbAccordionConfig]
 })
 export class FormComponent implements OnInit {
 
@@ -21,7 +23,10 @@ export class FormComponent implements OnInit {
 
   public gridResult: Grid = new Grid();
 
-  constructor(private fb: FormBuilder, private gridService: GridService) { }
+  constructor(private fb: FormBuilder, private gridService: GridService, config: NgbAccordionConfig) {
+    config.closeOthers = true;
+    config.type = 'info';
+  }
 
   ngOnInit(): void {
     this.formInit();
