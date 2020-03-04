@@ -2,17 +2,21 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Grid, GridContent } from 'src/app/models/grid.model';
 import { GridService } from 'src/app/services/grid.service';
+import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
+  providers: [NgbAccordionConfig]
 })
 export class FormComponent implements OnInit {
 
   public form: FormGroup;
   public items: FormArray;
   public units = ['px', 'fr', '%'];
+  public unitsGap = ['px', '%'];
+  public alignement = ['stretch', 'center', 'start', 'end'];
   public result;
   public columns = '';
   public rows = '';
@@ -21,7 +25,10 @@ export class FormComponent implements OnInit {
 
   public gridResult: Grid = new Grid();
 
-  constructor(private fb: FormBuilder, private gridService: GridService) { }
+  constructor(private fb: FormBuilder, private gridService: GridService, config: NgbAccordionConfig) {
+    config.closeOthers = true;
+    config.type = 'info';
+  }
 
   ngOnInit(): void {
     this.formInit();
@@ -29,6 +36,18 @@ export class FormComponent implements OnInit {
   }
   formInit() {
     this.form = this.fb.group({
+      columnGap: this.fb.group({
+        width: [''],
+        units: ['px']
+      }),
+      rowGap: this.fb.group({
+        width: [''],
+        units: ['px']
+      }),
+      gridAlignement: this.fb.group({
+        vertical: ['stretch'],
+        horizontal: ['stretch'],
+      }),
       columns: this.fb.array([this.createItem()]),
       rows: this.fb.array([this.createItem()]),
       content: this.fb.array([this.createContent()])
@@ -39,17 +58,17 @@ export class FormComponent implements OnInit {
     return this.fb.group({
       name: '',
       units: 'fr',
-      width: 1
+      width: ''
     });
   }
 
   createContent(): FormGroup {
     return this.fb.group({
-      containerName: '1',
-      containerColStart: 1,
-      containerColEnd: 1,
-      containerRowStart: 1,
-      containerRowEnd: 1,
+      containerName: '',
+      containerColStart: '',
+      containerColEnd: '',
+      containerRowStart: '',
+      containerRowEnd: '',
     });
   }
 
@@ -63,6 +82,7 @@ export class FormComponent implements OnInit {
     this.items.push(this.createContent());
 
   }
+
   onChanges() {
     this.form.valueChanges.subscribe(val => {
       this.gridService.updateGrid(this.form.value);
@@ -73,8 +93,13 @@ export class FormComponent implements OnInit {
     this.result = this.form.value;
   }
 
+  onReset() {
+    this.form.reset();
+  }
+
   deleteItem(index: number, type: string) {
     this.items = this.form.get(type) as FormArray;
     this.items.removeAt(index);
   }
+
 }

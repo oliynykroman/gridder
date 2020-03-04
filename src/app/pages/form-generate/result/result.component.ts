@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GridService } from 'src/app/services/grid.service';
-import { Grid, GridContent } from 'src/app/models/grid.model';
+import { Grid, GridContent, cellRow } from 'src/app/models/grid.model';
+import { GridHelper } from 'src/app/helpers/grid.helper';
+import { GridProperties } from 'src/app/enums/grid-property.enum';
 
 @Component({
   selector: 'app-result',
@@ -9,44 +11,44 @@ import { Grid, GridContent } from 'src/app/models/grid.model';
 })
 export class ResultComponent implements OnInit {
 
-  public grid: Grid = new Grid();
+  public grid;
   public gridColumns: string = '';
   public gridRows: string = '';
+  public gridColumnGap: string = '';
+  public gridRowGap: string = '';
   public gridCell = [];
-  constructor(private gridService: GridService) { }
+  public exampleCelCounter: number = 1;
+  
+  constructor(private gridService: GridService,
+    private gridHelper: GridHelper) { }
 
   ngOnInit(): void {
     this.gridService.changeGrid$.subscribe(data => {
       this.grid = data;
+      console.log(data);
       this.prepareGrid(data);
       this.prepareCell(data);
-      console.log(data)
-    });
+      this.exampleCelCounter = data.columns.length * data.rows.length;
+    }); 
   }
 
   prepareGrid(data: Grid) {
-    this.gridColumns = '';
-    this.gridRows = '';
-    for (let i = 0; i < data.columns.length; i++) {
-      this.gridColumns += data.columns[i].width + data.columns[i].units + ' ';
-    }
-    for (let i = 0; i < data.rows.length; i++) {
-      this.gridRows += data.rows[i].width + data.rows[i].units + ' ';
-    }
+    this.gridColumns = this.gridHelper.generateGreedProperty(data, GridProperties.columns);
+    this.gridRows = this.gridHelper.generateGreedProperty(data, GridProperties.rows);
+    this.gridColumnGap = data.columnGap.width + data.columnGap.units;
+    this.gridRowGap = data.rowGap.width + data.rowGap.units;
   }
 
   prepareCell(data: Grid) {
     this.gridCell = [];
-    let cellRow = {
-      col: '',
-      row: ''
-    }
+
     for (let i = 0; i < data.content.length; i++) {
-      cellRow.col = data.content[i].containerColStart + '/' + data.content[i].containerColEnd;
-      cellRow.row = data.content[i].containerRowStart + '/' + data.content[i].containerRowEnd;
-      this.gridCell.push(cellRow);
+      let temp = new cellRow('', '');
+      temp.col = data.content[i].containerColStart + '/' + data.content[i].containerColEnd;
+      temp.row = data.content[i].containerRowStart + '/' + data.content[i].containerRowEnd;
+
+      this.gridCell.push(temp);
     }
-    console.log(this.gridCell);
   }
 
 

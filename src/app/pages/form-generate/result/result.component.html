@@ -1,15 +1,30 @@
-<div class="grid-container">
-    <section class="grid" [ngStyle]="{'grid-template-columns': gridColumns, 'grid-template-rows': gridRows}">
-        <div class="grid-cell" *ngFor="let item of gridCell"
-            [ngStyle]="{'grid-column': item.col, 'grid-row': item.row}"></div>
+<div class="grid-container" *ngIf="grid">
+    <section class="grid">
+        <div class="grid-tracks"
+            [ngStyle]="{'grid-template-columns': gridColumns, 'grid-template-rows': gridRows, 'grid-column-gap':gridColumnGap, 'grid-row-gap':gridRowGap, 'justify-items': grid.gridAlignement.horizontal, 'align-items': grid.gridAlignement.vertical}">
+            <div class="grid-cell" *ngFor="let item of exampleCelCounter | numberToArray"></div>
+        </div>
+        <div class="grid-result"
+            [ngStyle]="{'grid-template-columns': gridColumns, 'grid-template-rows': gridRows, 'grid-column-gap':gridColumnGap, 'grid-row-gap':gridRowGap, 'justify-items': grid.gridAlignement.horizontal, 'align-items': grid.gridAlignement.vertical}">
+            <div class="grid-cell" *ngFor="let item of gridCell"
+                [ngStyle]="{'grid-column': item.col, 'grid-row': item.row}"></div>
+        </div>
     </section>
-    <section class="grid-css">
+    <section class="alert alert-primary">
         <p>
             display:grid;
             <br />
             grid-template-columns: {{gridColumns}};
             <br />
-            grid-template-rows: {{gridColumns}};
+            grid-template-rows: {{gridRows}};
+            <br />
+            grid-column-gap:{{gridColumnGap}};
+            <br />
+            grid-row-gap:{{gridRowGap}};
+            <br />
+            justify-items: {{grid.gridAlignement.horizontal}};
+            <br />
+            align-items: {{grid.gridAlignement.vertical}};
         </p>
     </section>
 </div>

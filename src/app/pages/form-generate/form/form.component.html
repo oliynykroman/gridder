@@ -1,87 +1,130 @@
 <section class="form-container" [formGroup]="form">
-    <mat-accordion>
-        <!-- grid setup -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Grid container
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="form-array-group">
-                <div formArrayName="columns" *ngFor="let item of form.get('columns')['controls']; let i = index">
-                    <div class="input-group--title">Column {{i}}</div>
-                    <div [formGroupName]="i" class="input-controlls-group">
-                        <mat-form-field>
-                            <input matInput placeholder="Enter column size" formControlName="width" type="number">
-                        </mat-form-field>
-                        <mat-form-field>
-                            <mat-select formControlName="units">
-                                <mat-option *ngFor="let item of units" [value]="item" placeholder="'select units'">
-                                    {{item}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <button mat-button color="warn" (click)="deleteItem(i, 'columns')">Delete</button>
+    <ngb-accordion activeIds="config-panel-one">
+        <!-- grid general info -->
+        <ngb-panel title="Grid properties" id="config-panel-one">
+            <ng-template ngbPanelContent>
+                <div formGroupName="columnGap" class="input-group">
+                    <input class="form-control" placeholder="column gap" formControlName="width" type="number">
+                    <select class="form-control" formControlName="units">
+                        <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'">
+                            {{item}}
+                        </option>
+                    </select>
+                </div>
+                <div formGroupName="rowGap" class="input-group">
+                    <input class="form-control" placeholder="row gap" formControlName="width" type="number">
+                    <select class="form-control" formControlName="units">
+                        <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'">
+                            {{item}}
+                        </option>
+                    </select>
+                </div>
+                <div formGroupName="gridAlignement" class="input-group">
+                    <div class="input-group wide">
+                        <label for="alignementVertical">Align Items</label>
+                        <select class="form-control" formControlName="vertical" id="alignementVertical">
+                            <option *ngFor="let item of alignement" [value]="item" placeholder="'select units'">
+                                {{item}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-group wide">
+                        <label for="alignementVertical">Justify Items</label>
+                        <select class="form-control" formControlName="horizontal">
+                            <option *ngFor="let item of alignement" [value]="item" placeholder="'select units'">
+                                {{item}}
+                            </option>
+                        </select>
                     </div>
                 </div>
-                <button mat-raised-button color="primary" (click)="addItem('columns')">Add column</button>
-            </div>
-            <div class="form-array-group">
-                <div formArrayName="rows" *ngFor="let item of form.get('rows')['controls']; let i = index">
-                    <div class="input-group--title">Row {{i}}</div>
-                    <div [formGroupName]="i" class="input-controlls-group">
-                        <mat-form-field>
-                            <input matInput placeholder="Enter row size" formControlName="width" type="number">
-                        </mat-form-field>
-                        <mat-form-field>
-                            <mat-select formControlName="units">
-                                <mat-option *ngFor="let item of units" [value]="item" placeholder="'select units'">
-                                    {{item}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <button mat-button color="warn" (click)="deleteItem(i, 'rows')">Delete</button>
-                    </div>
-                </div>
-                <button mat-raised-button color="primary" (click)="addItem('rows')">Add row</button>
-            </div>
-        </mat-expansion-panel>
-        <!-- grid content setup -->
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Grid content
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div formArrayName="content" *ngFor="let item of form.get('content')['controls']; let i = index">
+            </ng-template>
+        </ngb-panel>
+        <!-- grid tracks -->
+        <ngb-panel title="Grid tracks">
+            <ng-template ngbPanelContent>
+                <!-- column tracks -->
+                <div class="form-array-group">
+                    <div class="form-array-group__group" formArrayName="columns"
+                        *ngFor="let item of form.get('columns')['controls']; let i = index">
+                        <div class="input-group--title">Column {{i}}</div>
+                        <div [formGroupName]="i" class="input-group">
+                            <input class="form-control" placeholder="Size" formControlName="width" type="number">
 
-                <div [formGroupName]="i" class="input-controlls-group wrap">
-                    <div class="input-group--title w-100">Content {{i}}</div>
-                    <mat-form-field class="w-50">
-                        <input matInput placeholder="container name" formControlName="containerName" type="text">
-                    </mat-form-field>
-                    <button class="w-50" mat-button color="warn" (click)="deleteItem(i, 'content')">Delete</button>
-                    <mat-form-field class="w-50">
-                        <input matInput placeholder="container column start" formControlName="containerColStart"
-                            type="text">
-                    </mat-form-field>
-                    <mat-form-field class="w-50">
-                        <input matInput placeholder="container column end" formControlName="containerColEnd"
-                            type="text">
-                    </mat-form-field>
-                    <mat-form-field class="w-50">
-                        <input matInput placeholder="container row start" formControlName="containerRowStart"
-                            type="text">
-                    </mat-form-field>
-                    <mat-form-field class="w-50">
-                        <input matInput placeholder="container row end" formControlName="containerRowEnd" type="text">
-                    </mat-form-field>
+                            <select class="form-control" formControlName="units">
+                                <option *ngFor="let item of units" [value]="item" placeholder="'select units'">
+                                    {{item}}
+                                </option>
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-danger" (click)="deleteItem(i, 'columns')">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-sm add-button" (click)="addItem('columns')">Add column</button>
                 </div>
-            </div>
-            <button mat-raised-button color="primary" (click)="addContent('content')">Add content block</button>
-        </mat-expansion-panel>
-    </mat-accordion>
+                <hr>
+                <!-- row tracks -->
+                <div class="form-array-group">
+                    <div class="form-array-group__group" formArrayName="rows"
+                        *ngFor="let item of form.get('rows')['controls']; let i = index">
+                        <div class="input-group--title">Row {{i}}</div>
+                        <div [formGroupName]="i" class="input-group">
+                            <input class="form-control" placeholder="Size" formControlName="width" type="number">
+
+                            <select class="form-control" formControlName="units">
+                                <option *ngFor="let item of units" [value]="item" placeholder="'select units'">
+                                    {{item}}
+                                </option>
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-danger" (click)="deleteItem(i, 'rows')">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-sm add-button" (click)="addItem('rows')">Add row</button>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        <!-- grid content setup -->
+        <ngb-panel title="Grid content">
+            <ng-template ngbPanelContent>
+                <div class="form-array-group">
+                    <div class="form-array-group__group" formArrayName="content"
+                        *ngFor="let item of form.get('content')['controls']; let i = index">
+                        <div class="input-group--title">Content {{i}}</div>
+                        <div [formGroupName]="i" class="input-group">
+                            <div class="input-group">
+                                <input class=" form-control" placeholder="container name"
+                                    formControlName="containerName" type="text">
+                            </div>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="column start"
+                                    formControlName="containerColStart" type="text">
+
+                                <input class="form-control" placeholder="column end" formControlName="containerColEnd"
+                                    type="text">
+                            </div>
+                            <div class="input-group">
+
+                                <input class="form-control" placeholder="row start" formControlName="containerRowStart"
+                                    type="text">
+
+                                <input class="form-control" placeholder="row end" formControlName="containerRowEnd"
+                                    type="text">
+                            </div>
+                            <button class="btn btn-danger" (click)="deleteItem(i, 'content')">Delete</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-sm add-button" (click)="addContent('content')">Add content
+                        block</button>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
 
     <!-- save config  -->
-    <button mat-raised-button color="primary" (click)="onSubmit()">Save all</button>
+    <div class="input-group">
+        <button class="btn btn-primary add-button" (click)="onSubmit()">Save all</button>
+        <button class="btn btn-danger add-button" (click)="onReset()">Clear</button>
+    </div>
 </section>
