@@ -1,17 +1,55 @@
 <section class="form-container" [formGroup]="form">
     <ngb-accordion activeIds="config-panel-one">
-        <!-- grid setup -->
-        <ngb-panel title="Grid container" id="config-panel-one">
+        <!-- grid general info -->
+        <ngb-panel title="Grid properties" id="config-panel-one">
+            <ng-template ngbPanelContent>
+                <div formGroupName="columnGap" class="input-group">
+                    <input class="form-control" placeholder="column gap" formControlName="size" type="number">
+                    <select class="form-control" formControlName="units">
+                        <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'">
+                            {{item}}
+                        </option>
+                    </select>
+                </div>
+                <div formGroupName="rowGap" class="input-group">
+                    <input class="form-control" placeholder="row gap" formControlName="size" type="number">
+                    <select class="form-control" formControlName="units">
+                        <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'">
+                            {{item}}
+                        </option>
+                    </select>
+                </div>
+                <div formGroupName="gridAlignement" class="input-group">
+                    <div class="input-group wide">
+                        <label for="alignementVertical">Align Items</label>
+                        <select class="form-control" formControlName="vertical" id="alignementVertical">
+                            <option *ngFor="let item of alignement" [value]="item" placeholder="'select units'">
+                                {{item}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-group wide">
+                        <label for="alignementVertical">Justify Items</label>
+                        <select class="form-control" formControlName="horizontal">
+                            <option *ngFor="let item of alignement" [value]="item" placeholder="'select units'">
+                                {{item}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        <!-- grid tracks -->
+        <ngb-panel title="Grid tracks">
             <ng-template ngbPanelContent>
                 <div class="form-array-group">
                     <div class="form-array-group__group" formArrayName="columns"
                         *ngFor="let item of form.get('columns')['controls']; let i = index">
                         <div class="input-group--title">Column {{i}}</div>
                         <div [formGroupName]="i" class="input-group">
-                            <input class="form-control" class="form-control" placeholder="Size" formControlName="width"
-                                type="number">
+                            <input class="form-control" placeholder="Size" formControlName="width" type="number">
 
-                            <select class="form-control" class="form-control" formControlName="units">
+                            <select class="form-control" formControlName="units">
                                 <option *ngFor="let item of units" [value]="item" placeholder="'select units'">
                                     {{item}}
                                 </option>
@@ -29,10 +67,9 @@
                         *ngFor="let item of form.get('rows')['controls']; let i = index">
                         <div class="input-group--title">Row {{i}}</div>
                         <div [formGroupName]="i" class="input-group">
-                            <input class="form-control" class="form-control" placeholder="Size" formControlName="width"
-                                type="number">
+                            <input class="form-control" placeholder="Size" formControlName="width" type="number">
 
-                            <select class="form-control" class="form-control" formControlName="units">
+                            <select class="form-control" formControlName="units">
                                 <option *ngFor="let item of units" [value]="item" placeholder="'select units'">
                                     {{item}}
                                 </option>
@@ -47,7 +84,7 @@
             </ng-template>
         </ngb-panel>
         <!-- grid content setup -->
-        <ngb-panel title=" Grid content">
+        <ngb-panel title="Grid content">
             <ng-template ngbPanelContent>
                 <div class="form-array-group">
                     <div class="form-array-group__group" formArrayName="content"

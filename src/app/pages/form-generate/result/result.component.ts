@@ -11,10 +11,11 @@ import { GridProperties } from 'src/app/enums/grid-property.enum';
 })
 export class ResultComponent implements OnInit {
 
-  public grid: Grid = new Grid();
+  public grid;
   public gridColumns: string = '';
   public gridRows: string = '';
   public gridCell = [];
+  public exampleCelCounter:number = 1;
   constructor(private gridService: GridService,
     private gridHelper: GridHelper) { }
 
@@ -23,6 +24,7 @@ export class ResultComponent implements OnInit {
       this.grid = data;
       this.prepareGrid(data);
       this.prepareCell(data);
+     this.exampleCelCounter = data.columns.length * data.rows.length;
     });
   }
 

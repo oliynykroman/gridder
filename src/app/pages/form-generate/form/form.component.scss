@@ -25,6 +25,18 @@
     margin-bottom: 50px;
 }
 
+.input-group {
+    &.wide {
+        display       : flex;
+        flex-direction: column;
+        margin-top    : 10px;
+
+        label {
+            margin-bottom: 0;
+        }
+    }
+}
+
 hr {
     margin-bottom: 40px;
     display      : block

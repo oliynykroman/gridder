@@ -7,9 +7,10 @@ import { FormComponent } from './form/form.component';
 import { ResultComponent } from './result/result.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { NumberToArray } from 'src/app/pipes/number-array.pipe';
 
 @NgModule({
-  declarations: [FormGenerateComponent, FormComponent, ResultComponent],
+  declarations: [FormGenerateComponent, FormComponent, ResultComponent, NumberToArray],
   imports: [
     CommonModule,
     FormGenerateRoutingModule,

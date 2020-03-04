@@ -15,6 +15,8 @@ export class FormComponent implements OnInit {
   public form: FormGroup;
   public items: FormArray;
   public units = ['px', 'fr', '%'];
+  public unitsGap = ['px', '%'];
+  public alignement = ['stretch', 'center', 'start', 'end'];
   public result;
   public columns = '';
   public rows = '';
@@ -34,6 +36,18 @@ export class FormComponent implements OnInit {
   }
   formInit() {
     this.form = this.fb.group({
+      columnGap: this.fb.group({
+        size: [''],
+        units: ['px']
+      }),
+      rowGap: this.fb.group({
+        size: [''],
+        units: ['px']
+      }),
+      gridAlignement: this.fb.group({
+        vertical: ['stretch'],
+        horizontal: ['stretch'],
+      }),
       columns: this.fb.array([this.createItem()]),
       rows: this.fb.array([this.createItem()]),
       content: this.fb.array([this.createContent()])
@@ -44,17 +58,17 @@ export class FormComponent implements OnInit {
     return this.fb.group({
       name: '',
       units: 'fr',
-      width: 1
+      width: ''
     });
   }
 
   createContent(): FormGroup {
     return this.fb.group({
-      containerName: '1',
-      containerColStart: 1,
-      containerColEnd: 1,
-      containerRowStart: 1,
-      containerRowEnd: 1,
+      containerName: '',
+      containerColStart: '',
+      containerColEnd: '',
+      containerRowStart: '',
+      containerRowEnd: '',
     });
   }
 
@@ -68,6 +82,7 @@ export class FormComponent implements OnInit {
     this.items.push(this.createContent());
 
   }
+
   onChanges() {
     this.form.valueChanges.subscribe(val => {
       this.gridService.updateGrid(this.form.value);
@@ -77,11 +92,14 @@ export class FormComponent implements OnInit {
   onSubmit() {
     this.result = this.form.value;
   }
+
   onReset() {
     this.form.reset();
   }
+
   deleteItem(index: number, type: string) {
     this.items = this.form.get(type) as FormArray;
     this.items.removeAt(index);
   }
+
 }
