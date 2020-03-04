@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Grid, GridContent } from 'src/app/models/grid.model';
 import { GridService } from 'src/app/services/grid.service';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -37,16 +37,16 @@ export class FormComponent implements OnInit {
   formInit() {
     this.form = this.fb.group({
       columnGap: this.fb.group({
-        width: [''],
-        units: ['px']
+        width: ['', Validators.required],
+        units: ['px', Validators.required]
       }),
       rowGap: this.fb.group({
-        width: [''],
-        units: ['px']
+        width: ['', Validators.required],
+        units: ['px', Validators.required]
       }),
       gridAlignement: this.fb.group({
-        vertical: ['stretch'],
-        horizontal: ['stretch'],
+        vertical: ['stretch', Validators.required],
+        horizontal: ['stretch', Validators.required]
       }),
       columns: this.fb.array([this.createItem()]),
       rows: this.fb.array([this.createItem()]),

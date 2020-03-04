@@ -1,20 +1,20 @@
-<section class="form-container" [formGroup]="form">
+<form class="form-container" [formGroup]="form" (ngSubmit)="onSubmit()">
     <ngb-accordion activeIds="config-panel-one">
         <!-- grid general info -->
         <ngb-panel title="Grid properties" id="config-panel-one">
             <ng-template ngbPanelContent>
                 <div formGroupName="columnGap" class="input-group">
-                    <input class="form-control" placeholder="column gap" formControlName="width" type="number">
+                    <input class="form-control" placeholder="column gap" formControlName="width" type="number" required>
                     <select class="form-control" formControlName="units">
-                        <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'">
+                        <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'" required>
                             {{item}}
                         </option>
                     </select>
                 </div>
                 <div formGroupName="rowGap" class="input-group">
-                    <input class="form-control" placeholder="row gap" formControlName="width" type="number">
+                    <input class="form-control" placeholder="row gap" formControlName="width" type="number" required>
                     <select class="form-control" formControlName="units">
-                        <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'">
+                        <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'" required>
                             {{item}}
                         </option>
                     </select>
@@ -48,9 +48,10 @@
                         *ngFor="let item of form.get('columns')['controls']; let i = index">
                         <div class="input-group--title">Column {{i}}</div>
                         <div [formGroupName]="i" class="input-group">
-                            <input class="form-control" placeholder="Size" formControlName="width" type="number">
+                            <input class="form-control" placeholder="Size" formControlName="width" type="number"
+                                required>
 
-                            <select class="form-control" formControlName="units">
+                            <select class="form-control" formControlName="units" required>
                                 <option *ngFor="let item of units" [value]="item" placeholder="'select units'">
                                     {{item}}
                                 </option>
@@ -69,9 +70,10 @@
                         *ngFor="let item of form.get('rows')['controls']; let i = index">
                         <div class="input-group--title">Row {{i}}</div>
                         <div [formGroupName]="i" class="input-group">
-                            <input class="form-control" placeholder="Size" formControlName="width" type="number">
+                            <input class="form-control" placeholder="Size" formControlName="width" type="number"
+                                required>
 
-                            <select class="form-control" formControlName="units">
+                            <select class="form-control" formControlName="units" required>
                                 <option *ngFor="let item of units" [value]="item" placeholder="'select units'">
                                     {{item}}
                                 </option>
@@ -95,11 +97,11 @@
                         <div [formGroupName]="i" class="input-group">
                             <div class="input-group">
                                 <input class=" form-control" placeholder="container name"
-                                    formControlName="containerName" type="text">
+                                    formControlName="containerName" type="text" required>
                             </div>
                             <div class="input-group">
                                 <input class="form-control" placeholder="column start"
-                                    formControlName="containerColStart" type="text">
+                                    formControlName="containerColStart" type="text" required>
 
                                 <input class="form-control" placeholder="column end" formControlName="containerColEnd"
                                     type="text">
@@ -107,10 +109,10 @@
                             <div class="input-group">
 
                                 <input class="form-control" placeholder="row start" formControlName="containerRowStart"
-                                    type="text">
+                                    type="text" required>
 
                                 <input class="form-control" placeholder="row end" formControlName="containerRowEnd"
-                                    type="text">
+                                    type="text" required>
                             </div>
                             <button class="btn btn-danger" (click)="deleteItem(i, 'content')">Delete</button>
                         </div>
@@ -124,7 +126,7 @@
 
     <!-- save config  -->
     <div class="input-group">
-        <button class="btn btn-primary add-button" (click)="onSubmit()">Save all</button>
+        <button class="btn btn-primary add-button" type="submit">Save all</button>
         <button class="btn btn-danger add-button" (click)="onReset()">Clear</button>
     </div>
-</section>
+</form>
