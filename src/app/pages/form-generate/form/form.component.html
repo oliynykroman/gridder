@@ -23,6 +23,7 @@
                     </div>
                     <button class="btn btn-primary btn-sm add-button" (click)="addItem('columns')">Add column</button>
                 </div>
+                <hr>
                 <div class="form-array-group">
                     <div class="form-array-group__group" formArrayName="columns"
                         *ngFor="let item of form.get('rows')['controls']; let i = index">
@@ -48,38 +49,43 @@
         <!-- grid content setup -->
         <ngb-panel title=" Grid content">
             <ng-template ngbPanelContent>
-                <div formArrayName="content" *ngFor="let item of form.get('content')['controls']; let i = index">
+                <div class="form-array-group">
+                    <div class="form-array-group__group" formArrayName="content"
+                        *ngFor="let item of form.get('content')['controls']; let i = index">
+                        <div class="input-group--title">Content {{i}}</div>
+                        <div [formGroupName]="i" class="input-group">
+                            <div class="input-group">
+                                <input class=" form-control" placeholder="container name"
+                                    formControlName="containerName" type="text">
+                            </div>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="column start"
+                                    formControlName="containerColStart" type="text">
 
-                    <div [formGroupName]="i" class="input-controlls-group wrap">
-                        <div class="input-group--title w-100">Content {{i}}</div>
-                        <div class="w-50">
-                            <input class="form-control" placeholder="container name" formControlName="containerName"
-                                type="text">
-                        </div>
-                        <button class="w-50" mat-button color="warn" (click)="deleteItem(i, 'content')">Delete</button>
-                        <div class="w-50">
-                            <input class="form-control" placeholder="container column start"
-                                formControlName="containerColStart" type="text">
-                        </div>
-                        <div class="w-50">
-                            <input class="form-control" placeholder="container column end"
-                                formControlName="containerColEnd" type="text">
-                        </div>
-                        <div class="w-50">
-                            <input class="form-control" placeholder="container row start"
-                                formControlName="containerRowStart" type="text">
-                        </div>
-                        <div class="w-50">
-                            <input class="form-control" placeholder="container row end"
-                                formControlName="containerRowEnd" type="text">
+                                <input class="form-control" placeholder="column end" formControlName="containerColEnd"
+                                    type="text">
+                            </div>
+                            <div class="input-group">
+
+                                <input class="form-control" placeholder="row start" formControlName="containerRowStart"
+                                    type="text">
+
+                                <input class="form-control" placeholder="row end" formControlName="containerRowEnd"
+                                    type="text">
+                            </div>
+                            <button class="btn btn-danger" (click)="deleteItem(i, 'content')">Delete</button>
                         </div>
                     </div>
+                    <button class="btn btn-primary btn-sm add-button" (click)="addContent('content')">Add content
+                        block</button>
                 </div>
-                <button color="primary" (click)="addContent('content')">Add content block</button>
             </ng-template>
         </ngb-panel>
     </ngb-accordion>
 
     <!-- save config  -->
-    <button class="btn btn-primary" (click)="onSubmit()">Save all</button>
+    <div class="input-group">
+        <button class="btn btn-primary add-button" (click)="onSubmit()">Save all</button>
+        <button class="btn btn-danger add-button" (click)="onReset()">Clear</button>
+    </div>
 </section>

@@ -77,7 +77,9 @@ export class FormComponent implements OnInit {
   onSubmit() {
     this.result = this.form.value;
   }
-
+  onReset() {
+    this.form.reset();
+  }
   deleteItem(index: number, type: string) {
     this.items = this.form.get(type) as FormArray;
     this.items.removeAt(index);
