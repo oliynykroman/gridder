@@ -14,23 +14,29 @@ export class ResultComponent implements OnInit {
   public grid;
   public gridColumns: string = '';
   public gridRows: string = '';
+  public gridColumnGap: string = '';
+  public gridRowGap: string = '';
   public gridCell = [];
-  public exampleCelCounter:number = 1;
+  public exampleCelCounter: number = 1;
+  
   constructor(private gridService: GridService,
     private gridHelper: GridHelper) { }
 
   ngOnInit(): void {
     this.gridService.changeGrid$.subscribe(data => {
       this.grid = data;
+      console.log(data);
       this.prepareGrid(data);
       this.prepareCell(data);
-     this.exampleCelCounter = data.columns.length * data.rows.length;
-    });
+      this.exampleCelCounter = data.columns.length * data.rows.length;
+    }); 
   }
 
   prepareGrid(data: Grid) {
     this.gridColumns = this.gridHelper.generateGreedProperty(data, GridProperties.columns);
     this.gridRows = this.gridHelper.generateGreedProperty(data, GridProperties.rows);
+    this.gridColumnGap = data.columnGap.width + data.columnGap.units;
+    this.gridRowGap = data.rowGap.width + data.rowGap.units;
   }
 
   prepareCell(data: Grid) {

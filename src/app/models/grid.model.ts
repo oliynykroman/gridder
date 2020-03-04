@@ -3,6 +3,8 @@ export class Grid {
     columns: GridStructure[];
     rows: GridStructure[];
     content: GridContent[];
+    columnGap:GridGap;
+    rowGap:GridGap;
 }
 
 
@@ -17,6 +19,11 @@ export class GridStructure {
     name: string;
     units: string;
     width: number
+}
+
+export class GridGap{
+    width: string;
+    units: string;
 }
 
 

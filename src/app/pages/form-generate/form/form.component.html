@@ -4,7 +4,7 @@
         <ngb-panel title="Grid properties" id="config-panel-one">
             <ng-template ngbPanelContent>
                 <div formGroupName="columnGap" class="input-group">
-                    <input class="form-control" placeholder="column gap" formControlName="size" type="number">
+                    <input class="form-control" placeholder="column gap" formControlName="width" type="number">
                     <select class="form-control" formControlName="units">
                         <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'">
                             {{item}}
@@ -12,7 +12,7 @@
                     </select>
                 </div>
                 <div formGroupName="rowGap" class="input-group">
-                    <input class="form-control" placeholder="row gap" formControlName="size" type="number">
+                    <input class="form-control" placeholder="row gap" formControlName="width" type="number">
                     <select class="form-control" formControlName="units">
                         <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'">
                             {{item}}
@@ -42,6 +42,7 @@
         <!-- grid tracks -->
         <ngb-panel title="Grid tracks">
             <ng-template ngbPanelContent>
+                <!-- column tracks -->
                 <div class="form-array-group">
                     <div class="form-array-group__group" formArrayName="columns"
                         *ngFor="let item of form.get('columns')['controls']; let i = index">
@@ -62,8 +63,9 @@
                     <button class="btn btn-primary btn-sm add-button" (click)="addItem('columns')">Add column</button>
                 </div>
                 <hr>
+                <!-- row tracks -->
                 <div class="form-array-group">
-                    <div class="form-array-group__group" formArrayName="columns"
+                    <div class="form-array-group__group" formArrayName="rows"
                         *ngFor="let item of form.get('rows')['controls']; let i = index">
                         <div class="input-group--title">Row {{i}}</div>
                         <div [formGroupName]="i" class="input-group">

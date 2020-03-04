@@ -37,11 +37,11 @@ export class FormComponent implements OnInit {
   formInit() {
     this.form = this.fb.group({
       columnGap: this.fb.group({
-        size: [''],
+        width: [''],
         units: ['px']
       }),
       rowGap: this.fb.group({
-        size: [''],
+        width: [''],
         units: ['px']
       }),
       gridAlignement: this.fb.group({
