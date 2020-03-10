@@ -1,7 +1,7 @@
 <form class="form-container" [formGroup]="form" (ngSubmit)="onSubmit()">
     <ngb-accordion activeIds="config-panel-one">
         <!-- grid general info -->
-        <ngb-panel title="Grid properties" id="config-panel-one">
+        <ngb-panel title="Grid Container" id="config-panel-one">
             <ng-template ngbPanelContent>
                 <div formGroupName="columnGap" class="input-group">
                     <label for="columnGap">Column gap</label>
@@ -43,8 +43,8 @@
                 </div>
             </ng-template>
         </ngb-panel>
-        <!-- grid tracks -->
-        <ngb-panel title="Grid tracks">
+        <!-- grid item -->
+        <ngb-panel title="Grid Items">
             <ng-template ngbPanelContent>
                 <!-- column tracks -->
                 <div class="form-array-group">
@@ -94,39 +94,38 @@
             </ng-template>
         </ngb-panel>
         <!-- grid content setup -->
-        <ngb-panel title="Grid content">
+        <ngb-panel title="Grid Cells">
             <ng-template ngbPanelContent>
                 <div class="form-array-group">
                     <div class="form-array-group__group" formArrayName="content"
                         *ngFor="let item of form.get('content')['controls']; let i = index">
-                        <div class="input-group--title">Content {{i}}</div>
+                        <div class="input-group--title">Cell {{i}}</div>
                         <div [formGroupName]="i" class="input-group">
                             <div class="input-group">
-                                <label>Class name</label>
+                                <label>Cell class name</label>
                                 <input class=" form-control" placeholder="container name"
                                     formControlName="containerName" type="text" required>
                             </div>
                             <div class="input-group">
-                                <label>Child column start/end</label>
-                                <input class="form-control" placeholder="column start"
-                                    formControlName="containerColStart" type="text" required>
+                                <label>Column grid lines start/end</label>
+                                <input class="form-control" placeholder="Start" formControlName="containerColStart"
+                                    type="text" required>
 
-                                <input class="form-control" placeholder="column end" formControlName="containerColEnd"
+                                <input class="form-control" placeholder="End" formControlName="containerColEnd"
                                     type="text">
                             </div>
                             <div class="input-group">
-                                <label>Child row start/end</label>
-                                <input class="form-control" placeholder="row start" formControlName="containerRowStart"
+                                <label>Row grid lines start/end</label>
+                                <input class="form-control" placeholder="Row start" formControlName="containerRowStart"
                                     type="text" required>
 
-                                <input class="form-control" placeholder="row end" formControlName="containerRowEnd"
+                                <input class="form-control" placeholder="Row end" formControlName="containerRowEnd"
                                     type="text" required>
                             </div>
                             <button class="btn btn-danger" (click)="deleteItem(i, 'content')">Delete</button>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-sm add-button" (click)="addContent('content')">Add content
-                        block</button>
+                    <button class="btn btn-primary btn-sm add-button" (click)="addContent('content')">Add cell</button>
                 </div>
             </ng-template>
         </ngb-panel>
@@ -134,6 +133,6 @@
 
     <!-- save config  -->
     <div class="input-group">
-        <button class="btn btn-primary add-button" type="submit">Save all</button>
+        <!-- <button class="btn btn-primary add-button" type="submit">Save all</button> -->
     </div>
 </form>

@@ -43,9 +43,10 @@ export class ResultComponent implements OnInit {
     this.gridCell = [];
 
     for (let i = 0; i < data.content.length; i++) {
-      let temp = new cellRow('', '');
+      let temp = new cellRow('', '', '');
       temp.col = data.content[i].containerColStart + '/' + data.content[i].containerColEnd;
       temp.row = data.content[i].containerRowStart + '/' + data.content[i].containerRowEnd;
+      temp.name = data.content[i].containerName;
 
       this.gridCell.push(temp);
     }

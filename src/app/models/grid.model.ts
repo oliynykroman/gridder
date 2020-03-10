@@ -3,8 +3,8 @@ export class Grid {
     columns: GridStructure[];
     rows: GridStructure[];
     content: GridContent[];
-    columnGap:GridGap;
-    rowGap:GridGap;
+    columnGap: GridGap;
+    rowGap: GridGap;
 }
 
 
@@ -21,7 +21,7 @@ export class GridStructure {
     width: number
 }
 
-export class GridGap{
+export class GridGap {
     width: string;
     units: string;
 }
@@ -30,8 +30,10 @@ export class GridGap{
 export class cellRow {
     col: string;
     row: string;
-    constructor(col: string, row: string) {
-      this.col = col;
-      this.row = row;
+    name: string;
+    constructor(col: string, row: string, name: string) {
+        this.col = col;
+        this.row = row;
+        this.name = name;
     }
-  }
+}
