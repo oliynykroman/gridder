@@ -48,9 +48,9 @@ export class FormComponent implements OnInit {
         vertical: ['stretch'],
         horizontal: ['stretch']
       }),
-      columns: this.fb.array([this.createItem()]),
-      rows: this.fb.array([this.createItem()]),
-      content: this.fb.array([this.createContent()])
+      columns: this.fb.array([]),
+      rows: this.fb.array([]),
+      content: this.fb.array([])
     })
   }
 

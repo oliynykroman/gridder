@@ -7,7 +7,9 @@
         <div class="grid-result"
             [ngStyle]="{'grid-template-columns': gridColumns, 'grid-template-rows': gridRows, 'grid-column-gap':gridColumnGap, 'grid-row-gap':gridRowGap, 'justify-items': grid.gridAlignement.horizontal, 'align-items': grid.gridAlignement.vertical}">
             <div class="grid-cell" *ngFor="let item of gridCell"
-                [ngStyle]="{'grid-column': item.col, 'grid-row': item.row}"></div>
+                [ngStyle]="{'grid-column': item.col, 'grid-row': item.row}">
+                <span *ngIf="item.name">.{{item.name}}</span>
+            </div>
         </div>
     </section>
     <section class="grid-css">
@@ -48,4 +50,4 @@
         </div>
     </section>
 </div>
-<h2 *ngIf="!grid" class="empty-grid alert alert-primary">Select data</h2>
+<h2 *ngIf="!grid" class="empty-grid alert alert-primary">Start here :)</h2>
