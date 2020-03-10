@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GridService } from 'src/app/services/grid.service';
-import { Grid, GridContent, cellRow } from 'src/app/models/grid.model';
+import { Grid, cellRow } from 'src/app/models/grid.model';
 import { GridHelper } from 'src/app/helpers/grid.helper';
 import { GridProperties } from 'src/app/enums/grid-property.enum';
 

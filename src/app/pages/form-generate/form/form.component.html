@@ -6,19 +6,18 @@
                 <div formGroupName="columnGap" class="input-group">
                     <label for="columnGap">Column gap</label>
                     <input class="form-control" placeholder="column gap" id="columnGap" formControlName="width"
-                        type="number" required>
+                        type="number">
                     <select class="form-control" formControlName="units">
-                        <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'" required>
+                        <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'">
                             {{item}}
                         </option>
                     </select>
                 </div>
                 <div formGroupName="rowGap" class="input-group">
                     <label for="rowGap">Row gap</label>
-                    <input class="form-control" placeholder="row gap" id="rowGap" formControlName="width" type="number"
-                        required>
+                    <input class="form-control" placeholder="row gap" id="rowGap" formControlName="width" type="number">
                     <select class="form-control" formControlName="units">
-                        <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'" required>
+                        <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'">
                             {{item}}
                         </option>
                     </select>
@@ -53,10 +52,9 @@
                         <div class="input-group--title">Column {{i}}</div>
                         <div [formGroupName]="i" class="input-group">
                             <label>Column size</label>
-                            <input class="form-control" placeholder="Size" formControlName="width" type="number"
-                                required>
+                            <input class="form-control" placeholder="Size" formControlName="width" type="number">
 
-                            <select class="form-control" formControlName="units" required>
+                            <select class="form-control" formControlName="units">
                                 <option *ngFor="let item of units" [value]="item" placeholder="'select units'">
                                     {{item}}
                                 </option>
@@ -76,10 +74,9 @@
                         <div class="input-group--title">Row {{i}}</div>
                         <div [formGroupName]="i" class="input-group">
                             <label>Row size</label>
-                            <input class="form-control" placeholder="Size" formControlName="width" type="number"
-                                required>
+                            <input class="form-control" placeholder="Size" formControlName="width" type="number">
 
-                            <select class="form-control" formControlName="units" required>
+                            <select class="form-control" formControlName="units">
                                 <option *ngFor="let item of units" [value]="item" placeholder="'select units'">
                                     {{item}}
                                 </option>
@@ -104,12 +101,12 @@
                             <div class="input-group">
                                 <label>Cell class name</label>
                                 <input class=" form-control" placeholder="container name"
-                                    formControlName="containerName" type="text" required>
+                                    formControlName="containerName" type="text">
                             </div>
                             <div class="input-group">
                                 <label>Column grid lines start/end</label>
                                 <input class="form-control" placeholder="Start" formControlName="containerColStart"
-                                    type="text" required>
+                                    type="text">
 
                                 <input class="form-control" placeholder="End" formControlName="containerColEnd"
                                     type="text">
@@ -117,10 +114,10 @@
                             <div class="input-group">
                                 <label>Row grid lines start/end</label>
                                 <input class="form-control" placeholder="Row start" formControlName="containerRowStart"
-                                    type="text" required>
+                                    type="text">
 
                                 <input class="form-control" placeholder="Row end" formControlName="containerRowEnd"
-                                    type="text" required>
+                                    type="text">
                             </div>
                             <button class="btn btn-danger" (click)="deleteItem(i, 'content')">Delete</button>
                         </div>

@@ -1,7 +1,7 @@
 <div class="grid-container" *ngIf="grid">
     <section class="grid">
         <div class="grid-tracks"
-            [ngStyle]="{'grid-template-columns': gridColumns, 'grid-template-rows': gridRows, 'grid-column-gap':gridColumnGap, 'grid-row-gap':gridRowGap, 'justify-items': grid.gridAlignement.horizontal, 'align-items': grid.gridAlignement.vertical}">
+            [ngStyle]="{'grid-template-columns': gridColumns, 'grid-template-rows': gridRows, 'grid-column-gap':gridColumnGap, 'grid-row-gap':gridRowGap}">
             <div class="grid-cell" *ngFor="let item of exampleCelCounter | numberToArray"></div>
         </div>
         <div class="grid-result"
@@ -14,7 +14,7 @@
     </section>
     <section class="grid-css">
         <div class="alert alert-primary">
-            <h3> Grid container styles:</h3>
+            <h2> Grid container styles:</h2>
             <p>
                 display:grid;
                 <br />
@@ -31,8 +31,8 @@
                 align-items: {{grid.gridAlignement.vertical}};
             </p>
         </div>
-        <div class="alert alert-primary">
-            <h3> Grid cells styles:</h3>
+        <div class="alert alert-primary" *ngIf="grid.content.length > 0">
+            <h2> Grid cell styles:</h2>
             <p *ngFor="let item of grid.content">
                 .{{item.containerName}}
                 {{ '{' }}
