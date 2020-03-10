@@ -4,7 +4,9 @@
         <ngb-panel title="Grid properties" id="config-panel-one">
             <ng-template ngbPanelContent>
                 <div formGroupName="columnGap" class="input-group">
-                    <input class="form-control" placeholder="column gap" formControlName="width" type="number" required>
+                    <label for="columnGap">Column gap</label>
+                    <input class="form-control" placeholder="column gap" id="columnGap" formControlName="width"
+                        type="number" required>
                     <select class="form-control" formControlName="units">
                         <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'" required>
                             {{item}}
@@ -12,7 +14,9 @@
                     </select>
                 </div>
                 <div formGroupName="rowGap" class="input-group">
-                    <input class="form-control" placeholder="row gap" formControlName="width" type="number" required>
+                    <label for="rowGap">Row gap</label>
+                    <input class="form-control" placeholder="row gap" id="rowGap" formControlName="width" type="number"
+                        required>
                     <select class="form-control" formControlName="units">
                         <option *ngFor="let item of unitsGap" [value]="item" placeholder="'select units'" required>
                             {{item}}
@@ -48,6 +52,7 @@
                         *ngFor="let item of form.get('columns')['controls']; let i = index">
                         <div class="input-group--title">Column {{i}}</div>
                         <div [formGroupName]="i" class="input-group">
+                            <label>Column size</label>
                             <input class="form-control" placeholder="Size" formControlName="width" type="number"
                                 required>
 
@@ -70,6 +75,7 @@
                         *ngFor="let item of form.get('rows')['controls']; let i = index">
                         <div class="input-group--title">Row {{i}}</div>
                         <div [formGroupName]="i" class="input-group">
+                            <label>Row size</label>
                             <input class="form-control" placeholder="Size" formControlName="width" type="number"
                                 required>
 
@@ -96,10 +102,12 @@
                         <div class="input-group--title">Content {{i}}</div>
                         <div [formGroupName]="i" class="input-group">
                             <div class="input-group">
+                                <label>Class name</label>
                                 <input class=" form-control" placeholder="container name"
                                     formControlName="containerName" type="text" required>
                             </div>
                             <div class="input-group">
+                                <label>Child column start/end</label>
                                 <input class="form-control" placeholder="column start"
                                     formControlName="containerColStart" type="text" required>
 
@@ -107,7 +115,7 @@
                                     type="text">
                             </div>
                             <div class="input-group">
-
+                                <label>Child row start/end</label>
                                 <input class="form-control" placeholder="row start" formControlName="containerRowStart"
                                     type="text" required>
 
@@ -127,6 +135,5 @@
     <!-- save config  -->
     <div class="input-group">
         <button class="btn btn-primary add-button" type="submit">Save all</button>
-        <button class="btn btn-danger add-button" (click)="onReset()">Clear</button>
     </div>
 </form>

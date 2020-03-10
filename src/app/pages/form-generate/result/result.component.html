@@ -10,21 +10,42 @@
                 [ngStyle]="{'grid-column': item.col, 'grid-row': item.row}"></div>
         </div>
     </section>
-    <section class="alert alert-primary">
-        <p>
-            display:grid;
-            <br />
-            grid-template-columns: {{gridColumns}};
-            <br />
-            grid-template-rows: {{gridRows}};
-            <br />
-            grid-column-gap:{{gridColumnGap}};
-            <br />
-            grid-row-gap:{{gridRowGap}};
-            <br />
-            justify-items: {{grid.gridAlignement.horizontal}};
-            <br />
-            align-items: {{grid.gridAlignement.vertical}};
-        </p>
+    <section class="grid-css">
+        <div class="alert alert-primary">
+            <h3> Grid container styles:</h3>
+            <p>
+                display:grid;
+                <br />
+                grid-template-columns: {{gridColumns}};
+                <br />
+                grid-template-rows: {{gridRows}};
+                <br />
+                grid-column-gap:{{gridColumnGap}};
+                <br />
+                grid-row-gap:{{gridRowGap}};
+                <br />
+                justify-items: {{grid.gridAlignement.horizontal}};
+                <br />
+                align-items: {{grid.gridAlignement.vertical}};
+            </p>
+        </div>
+        <div class="alert alert-primary">
+            <h3> Grid cells styles:</h3>
+            <p *ngFor="let item of grid.content">
+                .{{item.containerName}}
+                {{ '{' }}
+                <br />
+                grid-column-start:{{item.containerColStart}};
+                <br />
+                grid-column-end:{{item.containerColEnd}};
+                <br />
+                grid-row-start:{{item.containerRowStart}};
+                <br />
+                grid-row-end:{{item.containerRowEnd}};
+                <br />
+                {{ '}' }}
+            </p>
+        </div>
     </section>
 </div>
+<h2 *ngIf="!grid" class="empty-grid alert alert-primary">Select data</h2>

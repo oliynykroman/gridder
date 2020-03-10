@@ -37,16 +37,16 @@ export class FormComponent implements OnInit {
   formInit() {
     this.form = this.fb.group({
       columnGap: this.fb.group({
-        width: ['', Validators.required],
-        units: ['px', Validators.required]
+        width: [''],
+        units: ['px']
       }),
       rowGap: this.fb.group({
-        width: ['', Validators.required],
-        units: ['px', Validators.required]
+        width: [''],
+        units: ['px']
       }),
       gridAlignement: this.fb.group({
-        vertical: ['stretch', Validators.required],
-        horizontal: ['stretch', Validators.required]
+        vertical: ['stretch'],
+        horizontal: ['stretch']
       }),
       columns: this.fb.array([this.createItem()]),
       rows: this.fb.array([this.createItem()]),
@@ -91,10 +91,6 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     this.result = this.form.value;
-  }
-
-  onReset() {
-    this.form.reset();
   }
 
   deleteItem(index: number, type: string) {
