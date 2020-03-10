@@ -26,5 +26,19 @@
             <br />
             align-items: {{grid.gridAlignement.vertical}};
         </p>
+        <p *ngFor="let item of grid.content">
+            .{{item.containerName}}
+            {{ '{' }}
+            <br />
+            grid-column-start:{{item.containerColStart}};
+            <br />
+            grid-column-end:{{item.containerColEnd}};
+            <br />
+            grid-row-start:{{item.containerRowStart}};
+            <br />
+            grid-row-end:{{item.containerRowEnd}};
+            <br />
+            {{ '}' }}
+        </p>
     </section>
 </div>
