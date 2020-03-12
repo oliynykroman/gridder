@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log(this.form.value);
+    this.userService.login(this.form.controls.get('login'), 'volvo').subscribe(data => console.log(data));
 
   }
 }
