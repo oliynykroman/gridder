@@ -17,11 +17,13 @@
             <h2> Grid container styles:</h2>
             <p>
                 display:grid;
-                <br />
+                <span *ngIf="grid.ieMode">display:-ms-grid;<br /></span>
                 grid-template-columns: {{gridColumns}};
                 <br />
+                <span *ngIf="grid.ieMode">-ms-grid-columns: {{ieGridColumns}};<br /></span>
                 grid-template-rows: {{gridRows}};
                 <br />
+                <span *ngIf="grid.ieMode">-ms-grid-rows: {{ieGridRows}};<br /></span>
                 grid-column-gap:{{gridColumnGap}};
                 <br />
                 grid-row-gap:{{gridRowGap}};

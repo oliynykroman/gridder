@@ -14,11 +14,13 @@ export class ResultComponent implements OnInit {
   public grid;
   public gridColumns: string = '';
   public gridRows: string = '';
+  public ieGridColumns: string = '';
+  public ieGridRows: string = '';
   public gridColumnGap: string = '';
   public gridRowGap: string = '';
   public gridCell = [];
   public exampleCelCounter: number = 1;
-  
+
   constructor(private gridService: GridService,
     private gridHelper: GridHelper) { }
 
@@ -29,7 +31,7 @@ export class ResultComponent implements OnInit {
       this.prepareGrid(data);
       this.prepareCell(data);
       this.exampleCelCounter = data.columns.length * data.rows.length;
-    }); 
+    });
   }
 
   prepareGrid(data: Grid) {
@@ -37,6 +39,11 @@ export class ResultComponent implements OnInit {
     this.gridRows = this.gridHelper.generateGreedProperty(data, GridProperties.rows);
     this.gridColumnGap = data.columnGap.width + data.columnGap.units;
     this.gridRowGap = data.rowGap.width + data.rowGap.units;
+
+    if (data.ieMode) {
+      this.ieGridColumns = this.gridHelper.generateGreedPropertyLegacy(data, GridProperties.columns, this.gridColumnGap);
+      this.ieGridRows = this.gridHelper.generateGreedPropertyLegacy(data, GridProperties.rows, this.gridRowGap);
+    }
   }
 
   prepareCell(data: Grid) {
@@ -51,6 +58,4 @@ export class ResultComponent implements OnInit {
       this.gridCell.push(temp);
     }
   }
-
-
 }
