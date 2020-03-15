@@ -5,6 +5,7 @@ export class Grid {
     content: GridContent[];
     columnGap: GridStructure;
     rowGap: GridStructure;
+    ieMode: boolean;
 }
 
 

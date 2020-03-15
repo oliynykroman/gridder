@@ -22,6 +22,7 @@ export class FormComponent implements OnInit {
   public rows = '';
   public content: GridContent[] = [];
   public panelOpenState = false;
+  public ieStatus = false;
 
   public gridResult: Grid = new Grid();
 
@@ -50,7 +51,8 @@ export class FormComponent implements OnInit {
       }),
       columns: this.fb.array([]),
       rows: this.fb.array([]),
-      content: this.fb.array([])
+      content: this.fb.array([]),
+      ieMode: this.fb.control(false)
     })
   }
 
@@ -85,6 +87,7 @@ export class FormComponent implements OnInit {
   onChanges() {
     this.form.valueChanges.subscribe(val => {
       this.gridService.updateGrid(this.form.value);
+      this.ieStatus = this.form.get('ieMode').value;
     });
   }
 
