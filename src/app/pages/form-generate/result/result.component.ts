@@ -24,6 +24,8 @@ export class ResultComponent implements OnInit {
   public exampleGridIe = {};
   public resultGrid = {};
   public resultGridIe = {};
+  public cell = {};
+  public cellIe = {};
 
 
   constructor(private gridService: GridService,
@@ -56,7 +58,6 @@ export class ResultComponent implements OnInit {
       'grid-row-gap': this.gridRowGap
     }
     this.exampleGridIe = {
-      'display': '-ms-grid',
       '-ms-grid-columns': this.ieGridColumns,
       'grid-template-columns': this.gridColumns,
       '-ms-grid-rows': this.ieGridRows,
@@ -72,18 +73,34 @@ export class ResultComponent implements OnInit {
       'justify-items': this.grid.gridAlignement.horizontal,
       'align-items': this.grid.gridAlignement.vertical
     }
-    this.resultGridIe = {};
+    this.resultGridIe = {
+      '-ms-grid-columns': this.ieGridColumns,
+      'grid-template-columns': this.gridColumns,
+      '-ms-grid-rows': this.ieGridRows,
+      'grid-template-rows': this.gridRows,
+      'grid-column-gap': this.gridColumnGap,
+      'grid-row-gap': this.gridRowGap,
+      'justify-items': this.grid.gridAlignement.horizontal,
+      'align-items': this.grid.gridAlignement.vertical
+    }
+
   };
 
   prepareCell(data: Grid) {
     this.gridCell = [];
 
     for (let i = 0; i < data.content.length; i++) {
-      let temp = new cellRow('', '', '');
+      let temp = new cellRow('', '', '', '', '', 1, 1);
       temp.col = data.content[i].containerColStart + '/' + data.content[i].containerColEnd;
       temp.row = data.content[i].containerRowStart + '/' + data.content[i].containerRowEnd;
       temp.name = data.content[i].containerName;
+      temp.colIeStart = data.content[i].containerColStart;
+      temp.rowIeStart = data.content[i].containerRowStart;
+      temp.colIeEnd = +data.content[i].containerColEnd - +data.content[i].containerColStart;
+      temp.rowIeEnd = +data.content[i].containerRowEnd - +data.content[i].containerRowStart;
       this.gridCell.push(temp);
+      
     }
+    console.log(this.gridCell);
   }
 }

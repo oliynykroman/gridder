@@ -3,10 +3,9 @@
         <div class="grid-tracks" [ngStyle]="grid.ieMode ? exampleGridIe : exampleGrid">
             <div class="grid-cell" *ngFor="let item of exampleCelCounter | numberToArray; let i = index"></div>
         </div>
-        <div class="grid-result"
-            [ngStyle]="{'grid-template-columns': gridColumns, 'grid-template-rows': gridRows, 'grid-column-gap':gridColumnGap, 'grid-row-gap':gridRowGap, 'justify-items': grid.gridAlignement.horizontal, 'align-items': grid.gridAlignement.vertical}">
+        <div class="grid-result" [ngStyle]="grid.ieMode ? resultGridIe : resultGrid">
             <div class="grid-cell" *ngFor="let item of gridCell"
-                [ngStyle]="{'grid-column': item.col, 'grid-row': item.row}">
+                [ngStyle]="{'grid-column': item.col, 'grid-row': item.row, '-ms-grid-column': item.colIeStart, '-ms-grid-column-span': item.colIeEnd, '-ms-grid-row': item.rowIeStart, '-ms-grid-row-span': item.rowIeEnd }">
                 <span *ngIf="item.name">.{{item.name}}</span>
             </div>
         </div>
@@ -15,7 +14,7 @@
         <div class="alert alert-primary">
             <h2> Grid container styles:</h2>
             <p>
-                display:grid;
+                display:grid;<br />
                 <span *ngIf="grid.ieMode">display:-ms-grid;<br /></span>
                 grid-template-columns: {{gridColumns}};
                 <br />
@@ -40,12 +39,20 @@
                 <br />
                 grid-column-start:{{item.containerColStart}};
                 <br />
+                <span *ngIf="grid.ieMode">-ms-grid-column:{{item.containerColStart}};</span>
+                <br />
                 grid-column-end:{{item.containerColEnd}};
+                <br />
+                <span *ngIf="grid.ieMode">-ms-grid-column-span:{{item.containerColEnd - item.containerColStart}};</span>
                 <br />
                 grid-row-start:{{item.containerRowStart}};
                 <br />
+                <span *ngIf="grid.ieMode">-ms-grid-row:{{item.containerRowStart}};</span>
+                <br />
                 grid-row-end:{{item.containerRowEnd}};
                 <br />
+                <span *ngIf="grid.ieMode">-ms-grid-row-span:{{item.containerRowEnd - item.containerRowStart}};</span>
+
                 {{ '}' }}
             </p>
         </div>

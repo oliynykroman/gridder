@@ -25,9 +25,17 @@ export class cellRow {
     col: string;
     row: string;
     name: string;
-    constructor(col: string, row: string, name: string) {
+    colIeStart: string;
+    rowIeStart: string;
+    colIeEnd: number;
+    rowIeEnd: number;
+    constructor(col: string, row: string, name: string, colIeStart: string, rowIeStart: string, colIeEnd: number, rowIeEnd: number) {
         this.col = col;
         this.row = row;
         this.name = name;
+        this.colIeStart = colIeStart;
+        this.colIeEnd = colIeEnd;
+        this.rowIeStart = rowIeStart;
+        this.rowIeEnd = rowIeEnd;
     }
 }
