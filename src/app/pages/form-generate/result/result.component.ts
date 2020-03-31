@@ -20,6 +20,11 @@ export class ResultComponent implements OnInit {
   public gridRowGap: string = '';
   public gridCell = [];
   public exampleCelCounter: number = 1;
+  public exampleGrid = {};
+  public exampleGridIe = {};
+  public resultGrid = {};
+  public resultGridIe = {};
+
 
   constructor(private gridService: GridService,
     private gridHelper: GridHelper) { }
@@ -44,7 +49,31 @@ export class ResultComponent implements OnInit {
       this.ieGridColumns = this.gridHelper.generateGreedPropertyLegacy(data, GridProperties.columns, this.gridColumnGap);
       this.ieGridRows = this.gridHelper.generateGreedPropertyLegacy(data, GridProperties.rows, this.gridRowGap);
     }
-  }
+    this.exampleGrid = {
+      'grid-template-columns': this.gridColumns,
+      'grid-template-rows': this.gridRows,
+      'grid-column-gap': this.gridColumnGap,
+      'grid-row-gap': this.gridRowGap
+    }
+    this.exampleGridIe = {
+      'display': '-ms-grid',
+      '-ms-grid-columns': this.ieGridColumns,
+      'grid-template-columns': this.gridColumns,
+      '-ms-grid-rows': this.ieGridRows,
+      'grid-template-rows': this.gridRows,
+      'grid-column-gap': this.gridColumnGap,
+      'grid-row-gap': this.gridRowGap
+    }
+    this.resultGrid = {
+      'grid-template-columns': this.gridColumns,
+      'grid-template-rows': this.gridRows,
+      'grid-column-gap': this.gridColumnGap,
+      'grid-row-gap': this.gridRowGap,
+      'justify-items': this.grid.gridAlignement.horizontal,
+      'align-items': this.grid.gridAlignement.vertical
+    }
+    this.resultGridIe = {};
+  };
 
   prepareCell(data: Grid) {
     this.gridCell = [];
@@ -54,7 +83,6 @@ export class ResultComponent implements OnInit {
       temp.col = data.content[i].containerColStart + '/' + data.content[i].containerColEnd;
       temp.row = data.content[i].containerRowStart + '/' + data.content[i].containerRowEnd;
       temp.name = data.content[i].containerName;
-
       this.gridCell.push(temp);
     }
   }

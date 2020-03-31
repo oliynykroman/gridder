@@ -9,6 +9,10 @@
 			{
 				"name": "feature/main-component",
 				"base": "develop"
+			},
+			{
+				"name": "feature/ie-support",
+				"base": "develop"
 			}
 		]
 	}
