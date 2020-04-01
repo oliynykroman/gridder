@@ -39,19 +39,16 @@
                 <br />
                 grid-column-start:{{item.containerColStart}};
                 <br />
-                <span *ngIf="grid.ieMode">-ms-grid-column:{{item.containerColStart}};</span>
-                <br />
                 grid-column-end:{{item.containerColEnd}};
                 <br />
-                <span *ngIf="grid.ieMode">-ms-grid-column-span:{{item.containerColEnd - item.containerColStart}};</span>
-                <br />
+                <span *ngIf="grid.ieMode">-ms-grid-column:{{item.containerColStartIe}}; <br /></span>
+                <span *ngIf="grid.ieMode">-ms-grid-column-span:{{item.containerColEndIe}}; <br /></span>
                 grid-row-start:{{item.containerRowStart}};
-                <br />
-                <span *ngIf="grid.ieMode">-ms-grid-row:{{item.containerRowStart}};</span>
                 <br />
                 grid-row-end:{{item.containerRowEnd}};
                 <br />
-                <span *ngIf="grid.ieMode">-ms-grid-row-span:{{item.containerRowEnd - item.containerRowStart}};</span>
+                <span *ngIf="grid.ieMode">-ms-grid-row:{{item.containerRowStartIe}};<br /></span>
+                <span *ngIf="grid.ieMode">-ms-grid-row-span:{{item.containerRowEndIe}};<br /></span>
 
                 {{ '}' }}
             </p>

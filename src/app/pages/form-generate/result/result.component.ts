@@ -90,16 +90,16 @@ export class ResultComponent implements OnInit {
     this.gridCell = [];
 
     for (let i = 0; i < data.content.length; i++) {
-      let temp = new cellRow('', '', '', '', '', 1, 1);
+      let temp = new cellRow('', '', '', '', '', '', '');
       temp.col = data.content[i].containerColStart + '/' + data.content[i].containerColEnd;
       temp.row = data.content[i].containerRowStart + '/' + data.content[i].containerRowEnd;
       temp.name = data.content[i].containerName;
-      temp.colIeStart = data.content[i].containerColStart;
-      temp.rowIeStart = data.content[i].containerRowStart;
-      temp.colIeEnd = +data.content[i].containerColEnd - +data.content[i].containerColStart;
-      temp.rowIeEnd = +data.content[i].containerRowEnd - +data.content[i].containerRowStart;
+      temp.colIeStart = data.content[i].containerColStartIe;
+      temp.colIeEnd = data.content[i].containerColEndIe;
+      temp.rowIeStart = data.content[i].containerRowStartIe;
+      temp.rowIeEnd = data.content[i].containerRowEndIe;
       this.gridCell.push(temp);
-      
+
     }
     console.log(this.gridCell);
   }
