@@ -1,7 +1,9 @@
 <div class="grid-container" *ngIf="grid">
     <section class="grid">
         <div class="grid-tracks" [ngStyle]="grid.ieMode ? exampleGridIe : exampleGrid">
-            <div class="grid-cell" *ngFor="let item of exampleCelCounter | numberToArray; let i = index"></div>
+            <span *ngIf="grid.ieMode" class="simplifiedIEGrid">Example grid simplified</span>
+            <div class="grid-cell" *ngFor="let item of exampleCelCounter | numberToArray; let i = index"
+                [ngStyle]="grid.ieMode ? exampleCellDimentionsIE : ''"></div>
         </div>
         <div class="grid-result" [ngStyle]="grid.ieMode ? resultGridIe : resultGrid">
             <div class="grid-cell" *ngFor="let item of gridCell"

@@ -22,10 +22,15 @@ export class ResultComponent implements OnInit {
   public exampleCelCounter: number = 1;
   public exampleGrid = {};
   public exampleGridIe = {};
+  public exampleCell = {}
+  public exampleCellIe = {}
   public resultGrid = {};
   public resultGridIe = {};
   public cell = {};
   public cellIe = {};
+  public exampleCellDimentionsIE = {};
+
+
 
 
   constructor(private gridService: GridService,
@@ -38,6 +43,10 @@ export class ResultComponent implements OnInit {
       this.prepareGrid(data);
       this.prepareCell(data);
       this.exampleCelCounter = data.columns.length * data.rows.length;
+      this.exampleCellDimentionsIE = {
+        'width': 'calc(' + 100 / data.columns.length + '%' + ' - ' + data.columnGap.width + data.columnGap.units + ')',
+        'height': 'calc(' + 100 / data.rows.length + '%' + ' - ' + data.rowGap.width + data.rowGap.units + ')'
+      }
     });
   }
 
