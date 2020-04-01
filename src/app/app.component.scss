@@ -1,6 +1,9 @@
 .container-fluid {
+    display              : -ms-grid;
     display              : grid;
+    -ms-grid-columns     : 300px 20px 1fr;
     grid-template-columns: 300px 1fr;
+    -ms-grid-rows        : 1fr 20px;
     grid-template-rows   : 1fr;
     grid-column-gap      : 20px;
     grid-row-gap         : 20px;
@@ -11,7 +14,13 @@
 
     header {
         grid-column     : 1;
-        background-color: var(--red);
-        color           : var(--white);
+        -ms-grid-column : 1;
+        height          : 100%;
+        background-color: #25262D;
+        color           : #fff;
+    }
+
+    section {
+        -ms-grid-column: 3;
     }
 }

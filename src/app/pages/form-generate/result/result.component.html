@@ -1,13 +1,13 @@
 <div class="grid-container" *ngIf="grid">
     <section class="grid">
-        <div class="grid-tracks"
-            [ngStyle]="{'grid-template-columns': gridColumns, 'grid-template-rows': gridRows, 'grid-column-gap':gridColumnGap, 'grid-row-gap':gridRowGap}">
-            <div class="grid-cell" *ngFor="let item of exampleCelCounter | numberToArray"></div>
+        <div class="grid-tracks" [ngStyle]="grid.ieMode ? exampleGridIe : exampleGrid">
+            <span *ngIf="grid.ieMode" class="simplifiedIEGrid">Example grid simplified</span>
+            <div class="grid-cell" *ngFor="let item of exampleCelCounter | numberToArray; let i = index"
+                [ngStyle]="grid.ieMode ? exampleCellDimentionsIE : ''"></div>
         </div>
-        <div class="grid-result"
-            [ngStyle]="{'grid-template-columns': gridColumns, 'grid-template-rows': gridRows, 'grid-column-gap':gridColumnGap, 'grid-row-gap':gridRowGap, 'justify-items': grid.gridAlignement.horizontal, 'align-items': grid.gridAlignement.vertical}">
+        <div class="grid-result" [ngStyle]="grid.ieMode ? resultGridIe : resultGrid">
             <div class="grid-cell" *ngFor="let item of gridCell"
-                [ngStyle]="{'grid-column': item.col, 'grid-row': item.row}">
+                [ngStyle]="{'grid-column': item.col, 'grid-row': item.row, '-ms-grid-column': item.colIeStart, '-ms-grid-column-span': item.colIeEnd, '-ms-grid-row': item.rowIeStart, '-ms-grid-row-span': item.rowIeEnd }">
                 <span *ngIf="item.name">.{{item.name}}</span>
             </div>
         </div>
@@ -16,12 +16,14 @@
         <div class="alert alert-primary">
             <h2> Grid container styles:</h2>
             <p>
-                display:grid;
-                <br />
+                display:grid;<br />
+                <span *ngIf="grid.ieMode">display:-ms-grid;<br /></span>
                 grid-template-columns: {{gridColumns}};
                 <br />
+                <span *ngIf="grid.ieMode">-ms-grid-columns: {{ieGridColumns}};<br /></span>
                 grid-template-rows: {{gridRows}};
                 <br />
+                <span *ngIf="grid.ieMode">-ms-grid-rows: {{ieGridRows}};<br /></span>
                 grid-column-gap:{{gridColumnGap}};
                 <br />
                 grid-row-gap:{{gridRowGap}};
@@ -41,10 +43,15 @@
                 <br />
                 grid-column-end:{{item.containerColEnd}};
                 <br />
+                <span *ngIf="grid.ieMode">-ms-grid-column:{{item.containerColStartIe}}; <br /></span>
+                <span *ngIf="grid.ieMode">-ms-grid-column-span:{{item.containerColEndIe}}; <br /></span>
                 grid-row-start:{{item.containerRowStart}};
                 <br />
                 grid-row-end:{{item.containerRowEnd}};
                 <br />
+                <span *ngIf="grid.ieMode">-ms-grid-row:{{item.containerRowStartIe}};<br /></span>
+                <span *ngIf="grid.ieMode">-ms-grid-row-span:{{item.containerRowEndIe}};<br /></span>
+
                 {{ '}' }}
             </p>
         </div>
