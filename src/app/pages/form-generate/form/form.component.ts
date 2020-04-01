@@ -68,8 +68,12 @@ export class FormComponent implements OnInit {
       containerName: '',
       containerColStart: '',
       containerColEnd: '',
+      containerColStartIe: '',
+      containerColEndIe: '',
       containerRowStart: '',
       containerRowEnd: '',
+      containerRowStartIe: '',
+      containerRowEndIe: '',
     });
   }
 

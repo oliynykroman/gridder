@@ -46,7 +46,7 @@
                 </div>
                 <div class="alert alert-info" role="alert" *ngIf="ieStatus">
                     Not all functions can be reproduced
-                  </div>
+                </div>
             </ng-template>
         </ngb-panel>
         <!-- grid item -->
@@ -114,17 +114,25 @@
                                 <label>Column grid lines start/end</label>
                                 <input class="form-control" placeholder="Start" formControlName="containerColStart"
                                     type="text">
+                                <input *ngIf="ieStatus" class="form-control" placeholder="IE start"
+                                    formControlName="containerColStartIe" type="text">
 
                                 <input class="form-control" placeholder="End" formControlName="containerColEnd"
                                     type="text">
+                                <input *ngIf="ieStatus" class="form-control" placeholder="IE End"
+                                    formControlName="containerColEndIe" type="text">
                             </div>
                             <div class="input-group">
                                 <label>Row grid lines start/end</label>
                                 <input class="form-control" placeholder="Row start" formControlName="containerRowStart"
                                     type="text">
+                                <input *ngIf="ieStatus" class="form-control" placeholder="IE start"
+                                    formControlName="containerRowStartIe" type="text">
 
                                 <input class="form-control" placeholder="Row end" formControlName="containerRowEnd"
                                     type="text">
+                                <input *ngIf="ieStatus" class="form-control" placeholder="IE end"
+                                    formControlName="containerRowEndIe" type="text">
                             </div>
                             <button class="btn btn-danger" (click)="deleteItem(i, 'content')">Delete</button>
                         </div>

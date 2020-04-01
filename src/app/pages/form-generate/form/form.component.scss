@@ -23,6 +23,11 @@
 
 .form-array-group {
     margin-bottom: 10px;
+
+}
+
+.form-array-group__group {
+    margin-bottom: 15px;
 }
 
 .input-group {
@@ -49,4 +54,12 @@ hr {
 
 .input-group {
     margin-bottom: 10px;
+}
+
+.form-control {
+    min-height: 36px;
+}
+
+.custom-conytrol {
+    line-height: 25px;
 }
