@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormArray } from '@angular/forms';
 import { Grid, GridContent } from 'src/app/models/grid.model';
 import { GridService } from 'src/app/services/grid.service';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -12,8 +12,8 @@ import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class FormComponent implements OnInit {
 
-  public form: FormGroup;
-  public items: FormArray;
+  public form: UntypedFormGroup;
+  public items: UntypedFormArray;
   public units = ['px', 'fr', '%'];
   public unitsGap = ['px', '%'];
   public alignement = ['stretch', 'center', 'start', 'end'];
@@ -26,7 +26,7 @@ export class FormComponent implements OnInit {
 
   public gridResult: Grid = new Grid();
 
-  constructor(private fb: FormBuilder, private gridService: GridService, config: NgbAccordionConfig) {
+  constructor(private fb: UntypedFormBuilder, private gridService: GridService, config: NgbAccordionConfig) {
     config.closeOthers = true;
     config.type = 'info';
   }
@@ -56,14 +56,14 @@ export class FormComponent implements OnInit {
     })
   }
 
-  createItem(): FormGroup {
+  createItem(): UntypedFormGroup {
     return this.fb.group({
       units: 'fr',
       width: '1'
     });
   }
 
-  createContent(): FormGroup {
+  createContent(): UntypedFormGroup {
     return this.fb.group({
       containerName: '',
       containerColStart: '',
@@ -78,12 +78,12 @@ export class FormComponent implements OnInit {
   }
 
   addItem(type: string): void {
-    this.items = this.form.get(type) as FormArray;
+    this.items = this.form.get(type) as UntypedFormArray;
     this.items.push(this.createItem());
   }
 
   addContent(type: string): void {
-    this.items = this.form.get(type) as FormArray;
+    this.items = this.form.get(type) as UntypedFormArray;
     this.items.push(this.createContent());
 
   }
@@ -100,7 +100,7 @@ export class FormComponent implements OnInit {
   }
 
   deleteItem(index: number, type: string) {
-    this.items = this.form.get(type) as FormArray;
+    this.items = this.form.get(type) as UntypedFormArray;
     this.items.removeAt(index);
   }
 
